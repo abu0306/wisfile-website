@@ -1,0 +1,13 @@
+name: Daily Vercel Rebuild
+
+on:
+  schedule:
+    - cron: '0 0 * * *' # 每天UTC 0点（北京时间早上8点）
+  workflow_dispatch: # 可手动触发
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Vercel Deploy Hook
+        run: curl -X POST https://api.vercel.com/v1/integrations/deploy/prj_6Ylg7la9s4viSNYMAuHMHXBW3O4H/v69wNRu1uZ

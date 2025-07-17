@@ -1,0 +1,37 @@
+/* 修改边框颜色 */
+.ant-select .ant-select-selector {
+  border-color: #ebebeb !important; /* 红色边框 */
+}
+
+/* 修改下拉框选中背景色 */
+.ant-select-dropdown .ant-select-item-option-selected {
+  background-color: #fff9e5 !important; /* 红色背景 */
+}
+
+.ant-select-dropdown .ant-select-item:hover {
+  background-color: #fff9e5 !important; /* 红色背景 */
+}
+
+/* 修改下拉框选中文字颜色 */
+.ant-select-dropdown .ant-select-item-option-selected:not(.ant-select-item-option-disabled) {
+  color: #333 !important; /* 红色文字 */
+}
+
+/* 激活状态边框 */
+.ant-select:not(.ant-select-disabled):not(.ant-select-customize-input):not(
+    .ant-pagination-size-changer
+  ):hover
+  .ant-select-selector,
+.ant-select-focused:not(.ant-select-disabled):not(.ant-select-customize-input):not(
+    .ant-pagination-size-changer
+  )
+  .ant-select-selector {
+  border-color: #ffdf75 !important; /* 红色边框 */
+  box-shadow: none; /* 红色阴影 */
+}
+
+.ant-select-dropdown {
+  box-shadow: 0px 0px 25px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 8px 8px 8px 8px;
+  border: 1px solid #ebebeb;
+}

@@ -1,0 +1,14 @@
+.ant-tooltip-arrow {
+  &::before,
+  &::after {
+    background: white !important;
+  }
+}
+.ant-tooltip-content {
+  .ant-tooltip-inner {
+    background: white;
+    color: #333;
+    font-size: 12px;
+    border-radius: 12px;
+  }
+}

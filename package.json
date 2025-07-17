@@ -1,0 +1,50 @@
+{
+  "name": "wisfile-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "node scripts/generate-downloads.mjs && next build && next-sitemap",
+    "prebuild": "node scripts/generate-downloads.mjs",
+    "start": "next start",
+    "lint": "next lint",
+    "lint:fix": "next lint --fix"
+  },
+  "dependencies": {
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@reduxjs/toolkit": "^2.8.2",
+    "@stagewise/toolbar-next": "^0.1.2",
+    "@svgr/webpack": "^8.1.0",
+    "antd": "^5.26.1",
+    "aos": "^2.3.4",
+    "axios": "^1.10.0",
+    "classnames": "^2.5.1",
+    "date-fns": "^4.1.0",
+    "gray-matter": "^4.0.3",
+    "lodash": "^4.17.21",
+    "next": "14.2.29",
+    "next-sitemap": "^4.2.3",
+    "notion-client": "^7.4.2",
+    "notion-types": "^7.4.2",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-notion-x": "^7.4.2",
+    "react-redux": "^9.2.0",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
+    "sass": "^1.89.2",
+    "swiper": "^11.2.8"
+  },
+  "devDependencies": {
+    "@types/aos": "^3.0.7",
+    "@types/lodash": "^4.17.18",
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.29",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
