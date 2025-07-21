@@ -6,12 +6,8 @@ import Rename003 from "@/assets/svg/rename-003.svg";
 import Rename004 from "@/assets/svg/rename-004.svg";
 import { useEffect } from "react";
 import AOS from "aos";
-import { message, Popover } from "antd";
-import { Download } from "@/components/download";
-
+import Link from "next/link";
 export default function AiRenamePage() {
-  const [messageApi, contextHolder] = message.useMessage();
-
   const scrollToTop = () => {
     window.scrollTo({
       top: 0,
@@ -27,16 +23,8 @@ export default function AiRenamePage() {
     });
   }, []);
 
-  const handleMobileDownload = () => {
-    messageApi.open({
-      content: "Available on desktop only. Please use a laptop.",
-      duration: 5,
-    });
-  };
-
   return (
     <main className="flex flex-col items-center bg-[#FEFCF7] w-full min-h-screen">
-      {contextHolder}
       <section className="flex flex-col items-center mt-16 md:mt-24 px-4 md:px-0 max-w-6xl">
         <h1 className="mb-4 px-4 md:px-0 font-bold text-[#232323] text-[26px] md:text-5xl text-center leading-tight">
           Let <span className="text-[#FFA800]">AI</span> rename your Messy Files{" "}
@@ -47,18 +35,16 @@ export default function AiRenamePage() {
           </span>
         </h1>
         <div className="flex md:flex-row flex-col justify-center items-center gap-4 mt-8 md:mt-12 mb-12 md:mb-16 px-4 md:px-0 w-full max-w-5xl">
-          <Popover arrow={false} placement={"bottom"} content={<Download />}>
+          <Link href="/downloads">
             <button className="hidden md:block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
-              Download ( Mac )
+              Download
             </button>
-          </Popover>
-
-          <button
-            onClick={handleMobileDownload}
-            className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition"
-          >
-            Download ( Mac )
-          </button>
+          </Link>
+          <Link href="/downloads">
+            <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition">
+              Download
+            </button>
+          </Link>
         </div>
       </section>
       <div
@@ -80,18 +66,16 @@ export default function AiRenamePage() {
               authors, dates — and renames them automatically based on real
               content and context.
             </p>
-            <Popover arrow={false} placement={"bottom"} content={<Download />}>
+            <Link href="/downloads">
               <button className="hidden md:block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
                 Renaming Now
               </button>
-            </Popover>
-
-            <button
-              onClick={handleMobileDownload}
-              className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition"
-            >
-              Renaming Now
-            </button>
+            </Link>
+            <Link href="/downloads">
+              <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition">
+                Renaming Now
+              </button>
+            </Link>
           </div>
           <div
             className="flex flex-1 justify-center order-1 md:order-2 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -115,18 +99,17 @@ export default function AiRenamePage() {
               All processing happens right on your device. No uploads, no
               tracking, no compromise — your files stay yours.
             </p>
-            <Popover arrow={false} placement={"bottom"} content={<Download />}>
+            <Link href="/downloads">
               <button className="hidden md:block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
                 Renaming Now
               </button>
-            </Popover>
+            </Link>
 
-            <button
-              onClick={handleMobileDownload}
-              className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition"
-            >
-              Renaming Now
-            </button>
+            <Link href="/downloads">
+              <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition">
+                Renaming Now
+              </button>
+            </Link>
           </div>
           <div
             className="flex flex-1 justify-center order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -148,18 +131,17 @@ export default function AiRenamePage() {
               No fees, no subscriptions, no strings attached. Just powerful AI
               file renaming — available offline, anytime.
             </p>
-            <Popover arrow={false} placement={"bottom"} content={<Download />}>
+            <Link href="/downloads">
               <button className="hidden md:block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
                 Renaming Now
               </button>
-            </Popover>
+            </Link>
 
-            <button
-              onClick={handleMobileDownload}
-              className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition"
-            >
-              Renaming Now
-            </button>
+            <Link href="/downloads">
+              <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition">
+                Renaming Now
+              </button>
+            </Link>
           </div>
           <div
             className="flex flex-1 justify-center order-1 md:order-2 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -183,17 +165,16 @@ export default function AiRenamePage() {
               Prefer &quot;Author-Year-Title&quot; or your own format? Create
               personalized templates to fit your workflow perfectly.
             </p>
-            <Popover arrow={false} placement={"bottom"} content={<Download />}>
+            <Link href="/downloads">
               <button className="hidden md:block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
                 Renaming Now
               </button>
-            </Popover>
-            <button
-              onClick={handleMobileDownload}
-              className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition"
-            >
-              Renaming Now
-            </button>
+            </Link>
+            <Link href="/downloads">
+              <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition">
+                Renaming Now
+              </button>
+            </Link>
           </div>
           <div
             className="flex flex-1 justify-center order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -213,21 +194,20 @@ export default function AiRenamePage() {
         <p className="mb-6 px-4 md:px-0 text-gray-600 text-sm md:text-base text-center">
           100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks.
         </p>
-        <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 md:mb-16 px-2 md:px-0 w-full max-w-5xl">
-          <Popover arrow={false} placement={"bottom"} content={<Download />}>
+        <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 md:mb-16 px-2 md:px-0 max-w-5xl">
+          <Link href="/downloads">
             <button className="hidden md:block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
-              Download ( Mac )
+              Download
             </button>
-          </Popover>
-          <button
-            onClick={handleMobileDownload}
-            className="md:hidden block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto h-[48px] text-gray-900 text-sm md:text-lg whitespace-nowrap transition"
-          >
-            Download ( Mac )
-          </button>
+          </Link>
+          <Link href="/downloads">
+            <button className="md:hidden block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto h-[48px] text-gray-900 text-sm md:text-lg whitespace-nowrap transition">
+              Download
+            </button>
+          </Link>
           <button
             onClick={scrollToTop}
-            className="flex-1 bg-transparent hover:bg-gray-100 px-6 md:px-8 md:py-4 border-2 border-gray-400 rounded-full w-full md:w-full h-[48px] md:h-auto md:font-semibold text-gray-900 text-sm md:text-lg transition"
+            className="bg-transparent hover:bg-gray-100 px-6 md:px-8 md:py-4 border-2 border-gray-400 rounded-full w-full md:w-full h-[48px] md:h-auto md:font-semibold text-gray-900 text-sm md:text-lg transition"
           >
             Online Demo
           </button>
