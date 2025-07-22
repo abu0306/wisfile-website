@@ -130,6 +130,13 @@ export function Nav() {
                       >
                         AI Foldering
                       </Link>
+                      <Link
+                        href="/features/metadata-remover"
+                        className="block hover:bg-gray-100 px-4 py-2 text-gray-700 text-sm"
+                        onClick={() => setIsFeaturesOpen(false)}
+                      >
+                        Metadata Remover
+                      </Link>
                     </div>
                   </div>
                 )}
@@ -239,6 +246,16 @@ export function Nav() {
                       }}
                     >
                       AI Foldering
+                    </Link>
+                    <Link
+                      href="/features/metadata-remover"
+                      className="block hover:bg-gray-100 px-0 py-2 rounded-md text-gray-700 text-sm"
+                      onClick={() => {
+                        setIsMobileFeaturesOpen(false);
+                        setIsMobileMenuOpen(false);
+                      }}
+                    >
+                      Metadata Remover
                     </Link>
                   </div>
                 )}

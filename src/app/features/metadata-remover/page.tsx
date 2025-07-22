@@ -1,0 +1,621 @@
+"use client";
+import { useEffect, useState } from "react";
+import AOS from "aos";
+import Link from "next/link";
+import LazyImage from "@/components/LazyImage";
+import UploadIcon from "@/assets/svg/upload.svg";
+import Remover001 from "@/assets/svg/remover-001.svg";
+import Remover002 from "@/assets/svg/remover-002.svg";
+import Remover003 from "@/assets/svg/remover-003.svg";
+import { PDFDocument } from "pdf-lib";
+
+interface MetadataItem {
+  key: string;
+  value: string;
+}
+
+interface FileInfo {
+  name: string;
+  size: string;
+  pageCount: number;
+}
+
+type ProcessingState = "idle" | "processing" | "completed";
+
+export default function MetadataRemoverPage() {
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [showMetadata, setShowMetadata] = useState(false);
+  const [processingState, setProcessingState] =
+    useState<ProcessingState>("idle");
+  const [metadata, setMetadata] = useState<MetadataItem[]>([]);
+  const [fileInfo, setFileInfo] = useState<FileInfo | null>(null);
+  const [isExtracting, setIsExtracting] = useState(false);
+  const [processingProgress, setProcessingProgress] = useState(0);
+
+  useEffect(() => {
+    AOS.init({
+      once: true,
+      easing: "ease-in-out",
+      disable: "mobile",
+    });
+  }, []);
+
+  const formatFileSize = (bytes: number): string => {
+    if (bytes === 0) return "0 Bytes";
+    const k = 1024;
+    const sizes = ["Bytes", "KB", "MB", "GB"];
+    const i = Math.floor(Math.log(bytes) / Math.log(k));
+    return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
+  };
+
+  const extractMetadata = async (file: File) => {
+    setIsExtracting(true);
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+
+      // Extract basic file info
+      const pageCount = pdfDoc.getPageCount();
+      const fileSize = formatFileSize(file.size);
+
+      setFileInfo({
+        name: file.name,
+        size: fileSize,
+        pageCount: pageCount,
+      });
+
+      // Extract metadata
+      const metadataItems: MetadataItem[] = [];
+
+      // Try to get metadata using pdf-lib methods
+      try {
+        const title = pdfDoc.getTitle();
+        if (title) metadataItems.push({ key: "Title", value: title });
+      } catch {}
+
+      try {
+        const author = pdfDoc.getAuthor();
+        if (author) metadataItems.push({ key: "Author", value: author });
+      } catch {}
+
+      try {
+        const subject = pdfDoc.getSubject();
+        if (subject) metadataItems.push({ key: "Subject", value: subject });
+      } catch {}
+
+      try {
+        const keywords = pdfDoc.getKeywords();
+        if (keywords) metadataItems.push({ key: "Keywords", value: keywords });
+      } catch {}
+
+      try {
+        const creator = pdfDoc.getCreator();
+        if (creator) metadataItems.push({ key: "Creator", value: creator });
+      } catch {}
+
+      try {
+        const producer = pdfDoc.getProducer();
+        if (producer) metadataItems.push({ key: "Producer", value: producer });
+      } catch {}
+
+      try {
+        const creationDate = pdfDoc.getCreationDate();
+        if (creationDate) {
+          metadataItems.push({
+            key: "Creation Date",
+            value: creationDate.toISOString().split("T")[0],
+          });
+        }
+      } catch {}
+
+      try {
+        const modificationDate = pdfDoc.getModificationDate();
+        if (modificationDate) {
+          metadataItems.push({
+            key: "Modification Date",
+            value: modificationDate.toISOString().split("T")[0],
+          });
+        }
+      } catch {}
+
+      // Add file-specific metadata
+      metadataItems.push({ key: "File Size", value: fileSize });
+      metadataItems.push({ key: "Page Count", value: pageCount.toString() });
+
+      // Add some additional info
+      metadataItems.push({ key: "File Name", value: file.name });
+      metadataItems.push({ key: "File Type", value: "PDF Document" });
+
+      setMetadata(metadataItems);
+    } catch (error) {
+      console.error("Error extracting metadata:", error);
+      setMetadata([
+        {
+          key: "Error",
+          value: "Failed to extract metadata from this PDF file",
+        },
+      ]);
+    } finally {
+      setIsExtracting(false);
+    }
+  };
+
+  const handleFileSelect = async (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const file = event.target.files?.[0];
+    if (file && file.type === "application/pdf") {
+      setSelectedFile(file);
+      setShowMetadata(true);
+      await extractMetadata(file);
+    }
+  };
+
+  const removeMetadata = async (): Promise<Uint8Array | null> => {
+    if (!selectedFile) return null;
+
+    try {
+      const arrayBuffer = await selectedFile.arrayBuffer();
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+
+      // Remove metadata
+      pdfDoc.setTitle("");
+      pdfDoc.setAuthor("");
+      pdfDoc.setSubject("");
+      pdfDoc.setKeywords([]);
+      pdfDoc.setCreator("");
+      pdfDoc.setProducer("");
+      pdfDoc.setCreationDate(new Date());
+      pdfDoc.setModificationDate(new Date());
+
+      // Save the cleaned PDF
+      const pdfBytes = await pdfDoc.save();
+      return pdfBytes;
+    } catch (error) {
+      console.error("Error removing metadata:", error);
+      return null;
+    }
+  };
+
+  const handleStart = async () => {
+    setProcessingState("processing");
+    setProcessingProgress(0);
+
+    try {
+      // Simulate progress
+      const progressInterval = setInterval(() => {
+        setProcessingProgress((prev) => {
+          if (prev >= 90) {
+            clearInterval(progressInterval);
+            return 90;
+          }
+          return prev + 10;
+        });
+      }, 200);
+
+      const cleanedPdfBytes = await removeMetadata();
+      clearInterval(progressInterval);
+      setProcessingProgress(100);
+
+      if (cleanedPdfBytes && selectedFile) {
+        // Save cleaned file data for download
+        setCleanedFileData(cleanedPdfBytes);
+
+        // Set processing state to completed (no need to update metadata as we show simple success message)
+        setProcessingState("completed");
+      }
+    } catch (error) {
+      console.error("Error processing file:", error);
+      setProcessingState("idle");
+    }
+  };
+
+  const handleCancel = () => {
+    setSelectedFile(null);
+    setShowMetadata(false);
+    setProcessingState("idle");
+    setProcessingProgress(0);
+    setMetadata([]);
+    setFileInfo(null);
+    setCleanedFileData(null);
+  };
+
+  const [cleanedFileData, setCleanedFileData] = useState<Uint8Array | null>(
+    null
+  );
+
+  const handleDownload = () => {
+    if (selectedFile && cleanedFileData) {
+      // Create download link for the cleaned file
+      const blob = new Blob([cleanedFileData], { type: "application/pdf" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `${selectedFile.name}`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+  };
+
+  const handleRemoveFile = () => {
+    setSelectedFile(null);
+    setShowMetadata(false);
+    setProcessingState("idle");
+    setProcessingProgress(0);
+    setMetadata([]);
+    setFileInfo(null);
+    setCleanedFileData(null);
+  };
+
+  return (
+    <main className="flex flex-col items-center bg-[#FEFCF7] w-full min-h-screen">
+      {/* Hero Section */}
+      <section className="flex flex-col items-center mt-16 md:mt-24 px-4 md:px-0 max-w-6xl">
+        <h1 className="mb-4 px-4 md:px-0 font-bold text-[#232323] text-[32px] md:text-5xl text-center leading-tight">
+          Metadata Remover
+        </h1>
+        <p className="mb-2 px-4 md:px-0 text-gray-600 text-sm md:text-base text-center max-w-3xl">
+          Let AI strip your sensitive metadata, ensuring your privacy.
+        </p>
+        <p className="mb-12 px-4 md:px-0 font-semibold text-gray-800 text-sm md:text-base text-center">
+          Totally for Free!
+        </p>
+      </section>
+
+      {/* File Upload and Metadata Display Section */}
+      <section className="flex flex-col items-center mb-16 md:mb-20 px-4 md:px-0 w-full max-w-6xl">
+        {!showMetadata ? (
+          /* File Upload Area */
+          <div className="flex flex-col items-center w-full">
+            <div
+              className="relative flex flex-col items-center justify-center bg-white hover:bg-gray-50 transition-colors cursor-pointer"
+              style={{
+                width: "1200px",
+                height: "300px",
+                borderRadius: "24px",
+                border: "4px solid rgba(255,255,255,0.5)",
+                maxWidth: "100%",
+              }}
+            >
+              <div className="flex flex-col items-center text-center">
+                {/* Upload Icon */}
+                <div className="mb-6">
+                  <UploadIcon className="w-16 h-16 text-[#FFD36A]" />
+                </div>
+
+                {/* Text Content */}
+                <div className="space-y-2">
+                  <h3 className="text-lg font-medium text-gray-800">
+                    Only supports PDF format
+                  </h3>
+                  <p className="text-sm text-gray-500">1 File One Time</p>
+                </div>
+              </div>
+
+              <input
+                type="file"
+                accept=".pdf"
+                onChange={handleFileSelect}
+                className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+              />
+            </div>
+          </div>
+        ) : (
+          /* Table-style Metadata Display */
+          <div className="w-full max-w-6xl bg-white rounded-lg border border-gray-200">
+            {/* Table Header */}
+            <div className="grid grid-cols-2 border-b border-gray-200">
+              <div className="p-6 border-r border-gray-200">
+                <h3 className="font-semibold text-lg text-gray-800">Files</h3>
+              </div>
+              <div className="p-6">
+                <h3 className="font-semibold text-lg text-gray-800">
+                  Metadata
+                </h3>
+              </div>
+            </div>
+
+            {/* Table Content */}
+            <div className="grid grid-cols-2 min-h-[400px]">
+              {/* Left Side - File Info */}
+              <div className="p-6 border-r border-gray-200 flex flex-col">
+                <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
+                  <div className="w-10 h-10 bg-red-500 rounded flex items-center justify-center">
+                    <span className="text-white text-xs font-bold">PDF</span>
+                  </div>
+                  <div className="flex-1">
+                    <p className="font-medium text-sm text-gray-800">
+                      {fileInfo?.name || selectedFile?.name || "Unknown file"}
+                    </p>
+                    <p className="text-gray-500 text-xs">
+                      {fileInfo?.size || "Unknown size"}
+                    </p>
+                    <p className="text-gray-500 text-xs">
+                      {fileInfo?.pageCount
+                        ? `${fileInfo.pageCount} pages`
+                        : "Unknown pages"}
+                    </p>
+                  </div>
+                  <button
+                    onClick={handleRemoveFile}
+                    className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                    title="Remove file"
+                  >
+                    <svg
+                      className="w-4 h-4"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M6 18L18 6M6 6l12 12"
+                      />
+                    </svg>
+                  </button>
+                </div>
+
+                {/* Status indicator */}
+                <div className="mt-4 flex items-center gap-2">
+                  {processingState === "processing" ? (
+                    <>
+                      <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
+                      <span className="text-yellow-600 text-xs font-medium">
+                        Processing...
+                      </span>
+                    </>
+                  ) : processingState === "completed" ? (
+                    <>
+                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                      <span className="text-green-600 text-xs font-medium">
+                        Metadata Cleaned
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="inline-block w-2 h-2 bg-red-500 rounded-full"></span>
+                      <span className="text-red-600 text-xs font-medium">
+                        Contains Metadata
+                      </span>
+                    </>
+                  )}
+                </div>
+              </div>
+
+              {/* Right Side - Metadata Info */}
+              <div className="p-6">
+                {isExtracting ? (
+                  <div className="flex justify-center items-center py-8">
+                    <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mr-2"></div>
+                    <span className="text-gray-600">
+                      Extracting metadata...
+                    </span>
+                  </div>
+                ) : processingState === "completed" ? (
+                  <div className="flex items-center justify-center py-8">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                      <span className="text-green-600 font-medium">
+                        Metadata Clear.
+                      </span>
+                    </div>
+                  </div>
+                ) : metadata.length === 0 ? (
+                  <div className="text-center py-8 text-gray-500">
+                    No metadata available
+                  </div>
+                ) : (
+                  <div className="space-y-3">
+                    {metadata.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
+                      >
+                        <span className="text-sm font-medium text-gray-600 min-w-[120px]">
+                          {item.key}
+                        </span>
+                        <span className="text-sm text-gray-800 text-right">
+                          {item.value || "—"}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Progress Bar */}
+            {processingState === "processing" && (
+              <div className="px-6 pb-4">
+                <div className="w-full bg-gray-200 rounded-full h-2">
+                  <div
+                    className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                    style={{ width: `${processingProgress}%` }}
+                  ></div>
+                </div>
+                <p className="text-center text-sm text-gray-600 mt-2">
+                  Removing the Metadata...
+                </p>
+              </div>
+            )}
+
+            {/* Action Buttons */}
+            <div className="flex flex-col items-center gap-4 p-6 border-t border-gray-200">
+              {processingState === "completed" && (
+                <span className="text-green-600 font-medium">
+                  Remove Succeed.
+                </span>
+              )}
+
+              <div className="flex justify-center gap-4">
+                {processingState === "processing" ? (
+                  <div className="flex items-center gap-2 px-8 py-3 bg-gray-200 rounded-full">
+                    <div className="w-4 h-4 border-2 border-gray-400 border-t-transparent rounded-full animate-spin"></div>
+                    <span className="text-gray-600">Processing...</span>
+                  </div>
+                ) : processingState === "completed" ? (
+                  <>
+                    <button
+                      onClick={handleDownload}
+                      className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+                    >
+                      Download
+                    </button>
+                    <button
+                      onClick={handleCancel}
+                      className="bg-gray-200 hover:bg-gray-300 shadow-md px-8 py-3 rounded-full font-semibold text-gray-700 transition"
+                    >
+                      Cancel
+                    </button>
+                  </>
+                ) : (
+                  <button
+                    onClick={handleStart}
+                    className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+                  >
+                    Start
+                  </button>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
+      </section>
+
+      {/* 100% Local & Free Section */}
+      <section className="flex flex-col items-center mb-16 md:mb-20 px-4 md:px-0 w-full max-w-6xl">
+        <div
+          className="flex flex-col md:flex-row items-center gap-8 p-8"
+          style={{
+            width: "1200px",
+            height: "187px",
+            background: "#FFF8E7",
+            borderRadius: "24px",
+            maxWidth: "100%",
+          }}
+        >
+          <div className="flex-1">
+            <h2 className="font-bold text-xl md:text-2xl mb-4">
+              100% Local & Free AI File Manager
+            </h2>
+            <p className="text-gray-600 text-sm md:text-base mb-6">
+              WisFile - A free local AI file manager with zero subscriptions,
+              obligations or usage limits. Files are safely, securely locally on
+              the fly.
+            </p>
+            <Link href="/downloads">
+              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
+                Try it for Free
+              </button>
+            </Link>
+          </div>
+          <div className="flex-shrink-0">
+            <LazyImage
+              src="/images/logo.png"
+              alt="WisFile Logo"
+              width={107}
+              height={107}
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Features Section */}
+      <section className="flex flex-col gap-12 md:gap-16 mb-16 md:mb-20 px-4 md:px-0 w-full max-w-5xl">
+        {/* Feature 1: Sensitive Information Eradication */}
+        <div className="flex md:flex-row flex-col justify-between items-center gap-8 md:gap-12">
+          <div
+            className="flex flex-1 justify-center order-1 md:order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
+            data-aos="fade-up-right"
+          >
+            <div className="w-full md:max-w-none bg-[#FFD36A] rounded-lg p-8 min-h-[300px] flex items-center justify-center">
+              <Remover001 className="w-full h-auto max-w-[280px]" />
+            </div>
+          </div>
+          <div
+            className="flex flex-col flex-1 items-start order-2 md:order-2"
+            data-aos="zoom-out"
+          >
+            <h2 className="mb-4 font-bold text-lg md:text-xl">
+              Sensitive Information Eradication
+            </h2>
+            <p className="mb-6 text-gray-600 text-sm md:text-base">
+              Automatically identifies and removes sensitive or personal
+              metadata embedded in documents, such as author names, creation
+              dates, and software versions.
+            </p>
+            <Link href="/downloads">
+              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
+                Try Now
+              </button>
+            </Link>
+          </div>
+        </div>
+
+        {/* Feature 2: Enhanced Anonymity */}
+        <div className="flex md:flex-row-reverse flex-col justify-between items-center gap-8 md:gap-12">
+          <div
+            className="flex flex-col flex-1 items-start order-2"
+            data-aos="zoom-out"
+          >
+            <h2 className="mb-4 font-bold text-lg md:text-xl">
+              Enhanced Anonymity
+            </h2>
+            <p className="mb-6 text-gray-600 text-sm md:text-base">
+              This feature is particularly useful for users who want to maintain
+              anonymity when sharing files (e.g., academic papers, business
+              proposals, ensuring content is evaluated without bias).
+            </p>
+            <Link href="/downloads">
+              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
+                Try Now
+              </button>
+            </Link>
+          </div>
+          <div
+            className="flex flex-1 justify-center order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
+            data-aos="fade-up-right"
+          >
+            <div className="w-full md:max-w-none bg-[#FFD36A] rounded-lg p-8 min-h-[300px] flex items-center justify-center">
+              <Remover002 className="w-full h-auto max-w-[280px]" />
+            </div>
+          </div>
+        </div>
+
+        {/* Feature 3: Supports Unbiased Review */}
+        <div className="flex md:flex-row flex-col justify-between items-center gap-8 md:gap-12">
+          <div
+            className="flex flex-1 justify-center order-1 md:order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
+            data-aos="fade-up-right"
+          >
+            <div className="w-full md:max-w-none bg-[#FFD36A] rounded-lg p-8 min-h-[300px] flex items-center justify-center">
+              <Remover003 className="w-full h-auto max-w-[280px]" />
+            </div>
+          </div>
+          <div
+            className="flex flex-col flex-1 items-start order-2 md:order-2"
+            data-aos="zoom-out"
+          >
+            <h2 className="mb-4 font-bold text-lg md:text-xl">
+              Supports Unbiased Review
+            </h2>
+            <p className="mb-6 text-gray-600 text-sm md:text-base">
+              For academic or professional submissions, removing metadata
+              ensures reviewers focus solely on the content itself, preventing
+              potential biases based on the author&apos;s background.
+            </p>
+            <Link href="/downloads">
+              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
+                Try Now
+              </button>
+            </Link>
+          </div>
+        </div>
+      </section>
+    </main>
+  );
+}
