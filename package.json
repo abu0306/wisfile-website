@@ -26,6 +26,7 @@
     "next-sitemap": "^4.2.3",
     "notion-client": "^7.4.2",
     "notion-types": "^7.4.2",
+    "pdf-lib": "^1.17.1",
     "react": "^18",
     "react-dom": "^18",
     "react-notion-x": "^7.4.2",

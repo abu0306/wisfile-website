@@ -24,7 +24,7 @@ export default function Footer() {
             </span>
           </div>
           <div className="flex flex-row md:flex-row justify-start md:justify-start gap-14 md:gap-12 mt-6 md:mt-4 w-full">
-            {/* Left Column: Home, AI Renaming, AI Foldering */}
+            {/* Left Column: Home, AI Renaming, AI Foldering, Metadata Remover */}
             <div className="flex flex-col gap-4 md:gap-2 text-left md:text-left">
               <a
                 href="/"
@@ -43,6 +43,12 @@ export default function Footer() {
                 className="font-medium text-gray-600 hover:text-[#FFA800] text-base md:text-lg transition-colors duration-200"
               >
                 AI Foldering
+              </a>
+              <a
+                href="/features/metadata-remover"
+                className="font-medium text-gray-600 hover:text-[#FFA800] text-base md:text-lg transition-colors duration-200"
+              >
+                Metadata Remover
               </a>
             </div>
             {/* Right Column: Blog, Downloads, About Us */}
