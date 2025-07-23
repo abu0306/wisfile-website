@@ -119,14 +119,14 @@ export default function Footer() {
       {/* Bottom Row: Copyright and Links */}
       <div className="flex md:flex-row flex-col justify-s items-start md:items-center mt-12 md:mt-8 px-6 sm:px-8 w-full max-w-6xl text-gray-400 text-xs md:text-base">
         <div className="mb-4 md:mb-0 font-medium text-left md:text-left">
-          @ 2025 ATOM INFINITE PTE. LTD. All rights reserved
+          @2025 ATOM INFINITE PTE. LTD. All rights reserved
         </div>
         <div className="flex flex-row gap-4 md:gap-6">
           <a
             href="/privacy-policy"
             className="font-medium hover:text-gray-600 transition-colors duration-200"
           >
-            Privacy Policy
+            &nbsp; Privacy Policy
           </a>
           <span className="text-gray-300">|</span>
           <a

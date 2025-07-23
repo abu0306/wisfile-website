@@ -4,6 +4,7 @@ import LazyImage from "@/components/LazyImage";
 import { useState } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { EffectCards } from "swiper/modules";
+import Link from "next/link";
 import "swiper/css";
 import "swiper/css/effect-cards";
 
@@ -139,9 +140,12 @@ export function FeedbackSection() {
                     {fb.text}
                   </div>
                 </div>
-                <div className="mt-4 font-semibold text-[#FFA800] text-sm md:text-base cursor-pointer">
+                <Link
+                  href="/downloads"
+                  className="mt-4 font-semibold text-[#FFA800] text-sm md:text-base cursor-pointer"
+                >
                   Get the Same →
-                </div>
+                </Link>
               </div>
             ))}
           </div>
