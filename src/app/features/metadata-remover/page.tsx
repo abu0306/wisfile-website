@@ -92,11 +92,6 @@ export default function MetadataRemoverPage() {
       } catch {}
 
       try {
-        const producer = pdfDoc.getProducer();
-        if (producer) metadataItems.push({ key: "Producer", value: producer });
-      } catch {}
-
-      try {
         const creationDate = pdfDoc.getCreationDate();
         if (creationDate) {
           metadataItems.push({
@@ -181,6 +176,7 @@ export default function MetadataRemoverPage() {
         originalFileName,
         cleanedPdfBytes.length
       );
+
       setCleanedMetadata(metadataItems);
     } catch (error) {
       console.error("Error extracting cleaned metadata:", error);
