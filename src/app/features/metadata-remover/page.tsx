@@ -358,32 +358,6 @@ export default function MetadataRemoverPage() {
                     </svg>
                   </button>
                 </div>
-
-                {/* Status indicator */}
-                <div className="mt-4 flex items-center gap-2">
-                  {processingState === "processing" ? (
-                    <>
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-                      <span className="text-yellow-600 text-xs font-medium">
-                        Processing...
-                      </span>
-                    </>
-                  ) : processingState === "completed" ? (
-                    <>
-                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
-                      <span className="text-green-600 text-xs font-medium">
-                        Metadata Cleaned
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="inline-block w-2 h-2 bg-red-500 rounded-full"></span>
-                      <span className="text-red-600 text-xs font-medium">
-                        Contains Metadata
-                      </span>
-                    </>
-                  )}
-                </div>
               </div>
 
               {/* Right Side - Metadata Info */}
@@ -447,7 +421,7 @@ export default function MetadataRemoverPage() {
             <div className="flex flex-col items-center gap-4 p-6 border-t border-gray-200">
               {processingState === "completed" && (
                 <span className="text-green-600 font-medium">
-                  Remove Succeed.
+                  Metadata removed.
                 </span>
               )}
 
