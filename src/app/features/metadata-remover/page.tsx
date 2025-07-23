@@ -7,6 +7,7 @@ import UploadIcon from "@/assets/svg/upload.svg";
 import Remover001 from "@/assets/svg/remover-001.svg";
 import Remover002 from "@/assets/svg/remover-002.svg";
 import Remover003 from "@/assets/svg/remover-003.svg";
+import DelIcon from "@/assets/svg/delete.svg";
 import { PDFDocument } from "pdf-lib";
 
 interface MetadataItem {
@@ -28,6 +29,7 @@ export default function MetadataRemoverPage() {
   const [processingState, setProcessingState] =
     useState<ProcessingState>("idle");
   const [metadata, setMetadata] = useState<MetadataItem[]>([]);
+  const [cleanedMetadata, setCleanedMetadata] = useState<MetadataItem[]>([]);
   const [fileInfo, setFileInfo] = useState<FileInfo | null>(null);
   const [isExtracting, setIsExtracting] = useState(false);
   const [processingProgress, setProcessingProgress] = useState(0);
@@ -48,21 +50,18 @@ export default function MetadataRemoverPage() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  const extractMetadata = async (file: File) => {
-    setIsExtracting(true);
+  // Generic function to extract metadata from PDF data
+  const extractPdfMetadata = async (
+    pdfData: ArrayBuffer | Uint8Array,
+    fileName: string,
+    fileSize: number
+  ): Promise<MetadataItem[]> => {
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(pdfData);
 
       // Extract basic file info
       const pageCount = pdfDoc.getPageCount();
-      const fileSize = formatFileSize(file.size);
-
-      setFileInfo({
-        name: file.name,
-        size: fileSize,
-        pageCount: pageCount,
-      });
+      const fileSizeFormatted = formatFileSize(fileSize);
 
       // Extract metadata
       const metadataItems: MetadataItem[] = [];
@@ -94,11 +93,6 @@ export default function MetadataRemoverPage() {
       } catch {}
 
       try {
-        const producer = pdfDoc.getProducer();
-        if (producer) metadataItems.push({ key: "Producer", value: producer });
-      } catch {}
-
-      try {
         const creationDate = pdfDoc.getCreationDate();
         if (creationDate) {
           metadataItems.push({
@@ -119,12 +113,45 @@ export default function MetadataRemoverPage() {
       } catch {}
 
       // Add file-specific metadata
-      metadataItems.push({ key: "File Size", value: fileSize });
+      metadataItems.push({ key: "File Size", value: fileSizeFormatted });
       metadataItems.push({ key: "Page Count", value: pageCount.toString() });
 
       // Add some additional info
-      metadataItems.push({ key: "File Name", value: file.name });
+      metadataItems.push({ key: "File Name", value: fileName });
       metadataItems.push({ key: "File Type", value: "PDF Document" });
+
+      return metadataItems;
+    } catch (error) {
+      console.error("Error extracting metadata:", error);
+      return [
+        {
+          key: "Error",
+          value: "Failed to extract metadata from this PDF file",
+        },
+      ];
+    }
+  };
+
+  const extractMetadata = async (file: File) => {
+    setIsExtracting(true);
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const metadataItems = await extractPdfMetadata(
+        arrayBuffer,
+        file.name,
+        file.size
+      );
+
+      // Set file info for display
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pageCount = pdfDoc.getPageCount();
+      const fileSize = formatFileSize(file.size);
+
+      setFileInfo({
+        name: file.name,
+        size: fileSize,
+        pageCount: pageCount,
+      });
 
       setMetadata(metadataItems);
     } catch (error) {
@@ -137,6 +164,29 @@ export default function MetadataRemoverPage() {
       ]);
     } finally {
       setIsExtracting(false);
+    }
+  };
+
+  const extractCleanedMetadata = async (
+    cleanedPdfBytes: Uint8Array,
+    originalFileName: string
+  ) => {
+    try {
+      const metadataItems = await extractPdfMetadata(
+        cleanedPdfBytes,
+        originalFileName,
+        cleanedPdfBytes.length
+      );
+
+      setCleanedMetadata(metadataItems);
+    } catch (error) {
+      console.error("Error extracting cleaned metadata:", error);
+      setCleanedMetadata([
+        {
+          key: "Error",
+          value: "Failed to extract metadata from cleaned PDF file",
+        },
+      ]);
     }
   };
 
@@ -201,7 +251,10 @@ export default function MetadataRemoverPage() {
         // Save cleaned file data for download
         setCleanedFileData(cleanedPdfBytes);
 
-        // Set processing state to completed (no need to update metadata as we show simple success message)
+        // Extract metadata from cleaned file
+        await extractCleanedMetadata(cleanedPdfBytes, selectedFile.name);
+
+        // Set processing state to completed
         setProcessingState("completed");
       }
     } catch (error) {
@@ -216,6 +269,7 @@ export default function MetadataRemoverPage() {
     setProcessingState("idle");
     setProcessingProgress(0);
     setMetadata([]);
+    setCleanedMetadata([]);
     setFileInfo(null);
     setCleanedFileData(null);
   };
@@ -245,21 +299,54 @@ export default function MetadataRemoverPage() {
     setProcessingState("idle");
     setProcessingProgress(0);
     setMetadata([]);
+    setCleanedMetadata([]);
     setFileInfo(null);
     setCleanedFileData(null);
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   return (
     <main className="flex flex-col items-center bg-[#FEFCF7] w-full min-h-screen">
       {/* Hero Section */}
       <section className="flex flex-col items-center mt-16 md:mt-24 px-4 md:px-0 max-w-6xl">
-        <h1 className="mb-4 px-4 md:px-0 font-bold text-[#232323] text-[32px] md:text-5xl text-center leading-tight">
+        <h1
+          className="mb-4 px-4 md:px-0"
+          style={{
+            fontWeight: "bold",
+            fontSize: "42px",
+            color: "#333333",
+            textAlign: "center",
+            fontStyle: "normal",
+          }}
+        >
           Metadata Remover
         </h1>
-        <p className="mb-2 px-4 md:px-0 text-gray-600 text-sm md:text-base text-center max-w-3xl">
+        <p
+          className="px-4 md:px-0 text-center max-w-3xl"
+          style={{
+            fontWeight: "400",
+            fontSize: "18px",
+            color: "#333333",
+            marginTop: "6px",
+            marginBottom: "22px",
+          }}
+        >
           Let AI strip your sensitive metadata, ensuring your privacy.
         </p>
-        <p className="mb-12 px-4 md:px-0 font-semibold text-gray-800 text-sm md:text-base text-center">
+        <p
+          className="mb-12 px-4 md:px-0 text-center"
+          style={{
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#333333",
+          }}
+        >
           Totally for Free!
         </p>
       </section>
@@ -282,15 +369,33 @@ export default function MetadataRemoverPage() {
               <div className="flex flex-col items-center text-center">
                 {/* Upload Icon */}
                 <div className="mb-6">
-                  <UploadIcon className="w-16 h-16 text-[#FFD36A]" />
+                  <UploadIcon
+                    className="text-[#FFD36A]"
+                    style={{ width: "94px", height: "94px" }}
+                  />
                 </div>
 
                 {/* Text Content */}
-                <div className="space-y-2">
-                  <h3 className="text-lg font-medium text-gray-800">
+                <div>
+                  <h3
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "30px",
+                      color: "#999999",
+                    }}
+                  >
                     Only supports PDF format
                   </h3>
-                  <p className="text-sm text-gray-500">1 File One Time</p>
+                  <p
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "14px",
+                      color: "#999999",
+                      marginTop: "28px",
+                    }}
+                  >
+                    1 File One Time
+                  </p>
                 </div>
               </div>
 
@@ -303,134 +408,131 @@ export default function MetadataRemoverPage() {
             </div>
           </div>
         ) : (
-          /* Table-style Metadata Display */
-          <div className="w-full max-w-6xl bg-white rounded-lg border border-gray-200">
-            {/* Table Header */}
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-6 border-r border-gray-200">
-                <h3 className="font-semibold text-lg text-gray-800">Files</h3>
+          <div className="w-full max-w-6xl space-y-6">
+            {/* Table-style Metadata Display */}
+            <div className="bg-white rounded-lg border border-gray-200">
+              {/* Table Header */}
+              <div className="grid grid-cols-2 border-b border-gray-200">
+                <div className="h-[37px] px-6 bg-gray-50 flex items-center">
+                  <h3 className="font-medium text-base text-gray-700">Files</h3>
+                </div>
+                <div className="h-[37px] px-6 bg-gray-50 flex items-center">
+                  <h3 className="font-medium text-base text-gray-700">
+                    Metadata
+                  </h3>
+                </div>
               </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-lg text-gray-800">
-                  Metadata
-                </h3>
-              </div>
-            </div>
 
-            {/* Table Content */}
-            <div className="grid grid-cols-2 min-h-[400px]">
-              {/* Left Side - File Info */}
-              <div className="p-6 border-r border-gray-200 flex flex-col">
-                <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                  <div className="w-10 h-10 bg-red-500 rounded flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">PDF</span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-medium text-sm text-gray-800">
-                      {fileInfo?.name || selectedFile?.name || "Unknown file"}
-                    </p>
-                    <p className="text-gray-500 text-xs">
-                      {fileInfo?.size || "Unknown size"}
-                    </p>
-                    <p className="text-gray-500 text-xs">
-                      {fileInfo?.pageCount
-                        ? `${fileInfo.pageCount} pages`
-                        : "Unknown pages"}
-                    </p>
-                  </div>
-                  <button
-                    onClick={handleRemoveFile}
-                    className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                    title="Remove file"
-                  >
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
+              {/* Table Content */}
+              <div className="grid grid-cols-2 min-h-[400px]">
+                {/* Left Side - File Info */}
+                <div className="p-6 border-r border-gray-200 flex flex-col">
+                  <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
+                    <div className="w-10 h-10 bg-red-500 rounded flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">PDF</span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium text-sm text-gray-800">
+                        {fileInfo?.name || selectedFile?.name || "Unknown file"}
+                      </p>
+                    </div>
+                    <button
+                      onClick={handleRemoveFile}
+                      className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                      title="Remove file"
                     >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
-                  </button>
-                </div>
-
-                {/* Status indicator */}
-                <div className="mt-4 flex items-center gap-2">
-                  {processingState === "processing" ? (
-                    <>
-                      <div className="w-2 h-2 bg-yellow-500 rounded-full animate-pulse"></div>
-                      <span className="text-yellow-600 text-xs font-medium">
-                        Processing...
-                      </span>
-                    </>
-                  ) : processingState === "completed" ? (
-                    <>
-                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
-                      <span className="text-green-600 text-xs font-medium">
-                        Metadata Cleaned
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <span className="inline-block w-2 h-2 bg-red-500 rounded-full"></span>
-                      <span className="text-red-600 text-xs font-medium">
-                        Contains Metadata
-                      </span>
-                    </>
-                  )}
-                </div>
-              </div>
-
-              {/* Right Side - Metadata Info */}
-              <div className="p-6">
-                {isExtracting ? (
-                  <div className="flex justify-center items-center py-8">
-                    <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mr-2"></div>
-                    <span className="text-gray-600">
-                      Extracting metadata...
-                    </span>
+                      <DelIcon className="text-[#AAAAAC] w-4 h-4 md:w-auto md:h-auto" />
+                    </button>
                   </div>
-                ) : processingState === "completed" ? (
-                  <div className="flex items-center justify-center py-8">
-                    <div className="flex items-center gap-2">
-                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
-                      <span className="text-green-600 font-medium">
-                        Metadata Clear.
+                </div>
+
+                {/* Right Side - Metadata Info */}
+                <div className="p-6">
+                  {isExtracting ? (
+                    <div className="flex justify-center items-center py-8">
+                      <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mr-2"></div>
+                      <span className="text-gray-600">
+                        Extracting metadata...
                       </span>
                     </div>
-                  </div>
-                ) : metadata.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500">
-                    No metadata available
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {metadata.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
-                      >
-                        <span className="text-sm font-medium text-gray-600 min-w-[120px]">
-                          {item.key}
-                        </span>
-                        <span className="text-sm text-gray-800 text-right">
-                          {item.value || "—"}
-                        </span>
+                  ) : processingState === "completed" ? (
+                    cleanedMetadata.length === 0 ? (
+                      <div className="text-center py-8 text-gray-500">
+                        No metadata available in cleaned file
                       </div>
-                    ))}
-                  </div>
-                )}
+                    ) : (
+                      <div className="space-y-3">
+                        {cleanedMetadata.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center py-2 border-b border-gray-100 last:border-b-0"
+                          >
+                            <span
+                              className="w-[150px] flex-shrink-0"
+                              style={{
+                                fontWeight: "400",
+                                fontSize: "14px",
+                                color: "#999999",
+                              }}
+                            >
+                              {item.key}
+                            </span>
+                            <span
+                              className="flex-1"
+                              style={{
+                                fontWeight: "500",
+                                fontSize: "14px",
+                                color: "#333333",
+                              }}
+                            >
+                              {item.value || "—"}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  ) : metadata.length === 0 ? (
+                    <div className="text-center py-8 text-gray-500">
+                      No metadata available
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {metadata.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center py-2 border-b border-gray-100 last:border-b-0"
+                        >
+                          <span
+                            className="w-[150px] flex-shrink-0"
+                            style={{
+                              fontWeight: "400",
+                              fontSize: "14px",
+                              color: "#999999",
+                            }}
+                          >
+                            {item.key}
+                          </span>
+                          <span
+                            className="flex-1"
+                            style={{
+                              fontWeight: "500",
+                              fontSize: "14px",
+                              color: "#333333",
+                            }}
+                          >
+                            {item.value || "—"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Progress Bar */}
             {processingState === "processing" && (
-              <div className="px-6 pb-4">
+              <div className="rounded-lg px-6 py-4">
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
                     className="bg-green-500 h-2 rounded-full transition-all duration-300"
@@ -444,10 +546,10 @@ export default function MetadataRemoverPage() {
             )}
 
             {/* Action Buttons */}
-            <div className="flex flex-col items-center gap-4 p-6 border-t border-gray-200">
+            <div className="rounded-lg flex flex-col items-center">
               {processingState === "completed" && (
                 <span className="text-green-600 font-medium">
-                  Remove Succeed.
+                  Metadata removed.
                 </span>
               )}
 
@@ -458,24 +560,39 @@ export default function MetadataRemoverPage() {
                     <span className="text-gray-600">Processing...</span>
                   </div>
                 ) : processingState === "completed" ? (
-                  <>
+                  <div className="mt-[30px] flex gap-[36px]">
                     <button
                       onClick={handleDownload}
-                      className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+                      className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md rounded-full font-semibold text-gray-900 transition"
+                      style={{
+                        width: "199px",
+                        height: "62px",
+                      }}
                     >
                       Download
                     </button>
                     <button
                       onClick={handleCancel}
-                      className="bg-gray-200 hover:bg-gray-300 shadow-md px-8 py-3 rounded-full font-semibold text-gray-700 transition"
+                      className="bg-gray-200 hover:bg-gray-300 shadow-md rounded-full font-semibold text-gray-700 transition"
+                      style={{
+                        width: "199px",
+                        height: "62px",
+                      }}
                     >
                       Cancel
                     </button>
-                  </>
+                  </div>
                 ) : (
                   <button
                     onClick={handleStart}
-                    className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+                    className="font-semibold text-gray-900 transition shadow-md"
+                    style={{
+                      width: "199px",
+                      height: "62px",
+                      background: "#F9D37A",
+                      borderRadius: "32px",
+                      marginTop: "26px",
+                    }}
                   >
                     Start
                   </button>
@@ -503,12 +620,20 @@ export default function MetadataRemoverPage() {
               100% Local & Free AI File Manager
             </h2>
             <p className="text-gray-600 text-sm md:text-base mb-6">
-              WisFile - A free local AI file manager with zero subscriptions,
-              obligations or usage limits. Files are safely, securely locally on
-              the fly.
+              Wisfile：A free local AI tool, which can auto-renames, categorizes
+              and organizes your files securely, turning chaos to clarity.
             </p>
             <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
+              <button
+                className="font-semibold text-gray-900 transition shadow-md"
+                style={{
+                  width: "333px",
+                  height: "48px",
+                  background:
+                    "linear-gradient(91deg, #FFDB49 0%, #FFF1B7 100%)",
+                  borderRadius: "24px",
+                }}
+              >
                 Try it for Free
               </button>
             </Link>
@@ -548,11 +673,18 @@ export default function MetadataRemoverPage() {
               metadata embedded in documents, such as author names, creation
               dates, and software versions.
             </p>
-            <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
-                Try Now
-              </button>
-            </Link>
+            <button
+              onClick={scrollToTop}
+              className="shadow-md font-semibold text-gray-900 transition"
+              style={{
+                width: "199px",
+                height: "62px",
+                background: "#F9D37A",
+                borderRadius: "32px",
+              }}
+            >
+              Try Now
+            </button>
           </div>
         </div>
 
@@ -570,11 +702,18 @@ export default function MetadataRemoverPage() {
               anonymity when sharing files (e.g., academic papers, business
               proposals, ensuring content is evaluated without bias).
             </p>
-            <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
-                Try Now
-              </button>
-            </Link>
+            <button
+              onClick={scrollToTop}
+              className="shadow-md font-semibold text-gray-900 transition"
+              style={{
+                width: "199px",
+                height: "62px",
+                background: "#F9D37A",
+                borderRadius: "32px",
+              }}
+            >
+              Try Now
+            </button>
           </div>
           <div
             className="flex flex-1 justify-center order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -608,11 +747,18 @@ export default function MetadataRemoverPage() {
               ensures reviewers focus solely on the content itself, preventing
               potential biases based on the author&apos;s background.
             </p>
-            <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
-                Try Now
-              </button>
-            </Link>
+            <button
+              onClick={scrollToTop}
+              className="shadow-md font-semibold text-gray-900 transition"
+              style={{
+                width: "199px",
+                height: "62px",
+                background: "#F9D37A",
+                borderRadius: "32px",
+              }}
+            >
+              Try Now
+            </button>
           </div>
         </div>
       </section>
