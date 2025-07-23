@@ -7,6 +7,7 @@ import UploadIcon from "@/assets/svg/upload.svg";
 import Remover001 from "@/assets/svg/remover-001.svg";
 import Remover002 from "@/assets/svg/remover-002.svg";
 import Remover003 from "@/assets/svg/remover-003.svg";
+import DelIcon from "@/assets/svg/delete.svg";
 import { PDFDocument } from "pdf-lib";
 
 interface MetadataItem {
@@ -411,11 +412,11 @@ export default function MetadataRemoverPage() {
           <div className="w-full max-w-6xl bg-white rounded-lg border border-gray-200">
             {/* Table Header */}
             <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-6 border-r border-gray-200">
-                <h3 className="font-semibold text-lg text-gray-800">Files</h3>
+              <div className="p-6 border-r border-gray-200 bg-gray-50">
+                <h3 className="font-medium text-base text-gray-700">Files</h3>
               </div>
-              <div className="p-6">
-                <h3 className="font-semibold text-lg text-gray-800">
+              <div className="p-6 bg-gray-50">
+                <h3 className="font-medium text-base text-gray-700">
                   Metadata
                 </h3>
               </div>
@@ -433,33 +434,13 @@ export default function MetadataRemoverPage() {
                     <p className="font-medium text-sm text-gray-800">
                       {fileInfo?.name || selectedFile?.name || "Unknown file"}
                     </p>
-                    <p className="text-gray-500 text-xs">
-                      {fileInfo?.size || "Unknown size"}
-                    </p>
-                    <p className="text-gray-500 text-xs">
-                      {fileInfo?.pageCount
-                        ? `${fileInfo.pageCount} pages`
-                        : "Unknown pages"}
-                    </p>
                   </div>
                   <button
                     onClick={handleRemoveFile}
                     className="p-2 text-gray-400 hover:text-red-500 transition-colors"
                     title="Remove file"
                   >
-                    <svg
-                      className="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={2}
-                        d="M6 18L18 6M6 6l12 12"
-                      />
-                    </svg>
+                    <DelIcon className="text-[#AAAAAC] w-4 h-4 md:w-auto md:h-auto" />
                   </button>
                 </div>
               </div>
@@ -566,7 +547,13 @@ export default function MetadataRemoverPage() {
                 ) : (
                   <button
                     onClick={handleStart}
-                    className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+                    className="font-semibold text-gray-900 transition shadow-md"
+                    style={{
+                      width: "199px",
+                      height: "62px",
+                      background: "#F9D37A",
+                      borderRadius: "32px",
+                    }}
                   >
                     Start
                   </button>
