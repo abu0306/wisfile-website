@@ -408,101 +408,131 @@ export default function MetadataRemoverPage() {
             </div>
           </div>
         ) : (
-          /* Table-style Metadata Display */
-          <div className="w-full max-w-6xl bg-white rounded-lg border border-gray-200">
-            {/* Table Header */}
-            <div className="grid grid-cols-2 border-b border-gray-200">
-              <div className="p-6 border-r border-gray-200 bg-gray-50">
-                <h3 className="font-medium text-base text-gray-700">Files</h3>
-              </div>
-              <div className="p-6 bg-gray-50">
-                <h3 className="font-medium text-base text-gray-700">
-                  Metadata
-                </h3>
-              </div>
-            </div>
-
-            {/* Table Content */}
-            <div className="grid grid-cols-2 min-h-[400px]">
-              {/* Left Side - File Info */}
-              <div className="p-6 border-r border-gray-200 flex flex-col">
-                <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
-                  <div className="w-10 h-10 bg-red-500 rounded flex items-center justify-center">
-                    <span className="text-white text-xs font-bold">PDF</span>
-                  </div>
-                  <div className="flex-1">
-                    <p className="font-medium text-sm text-gray-800">
-                      {fileInfo?.name || selectedFile?.name || "Unknown file"}
-                    </p>
-                  </div>
-                  <button
-                    onClick={handleRemoveFile}
-                    className="p-2 text-gray-400 hover:text-red-500 transition-colors"
-                    title="Remove file"
-                  >
-                    <DelIcon className="text-[#AAAAAC] w-4 h-4 md:w-auto md:h-auto" />
-                  </button>
+          <div className="w-full max-w-6xl space-y-6">
+            {/* Table-style Metadata Display */}
+            <div className="bg-white rounded-lg border border-gray-200">
+              {/* Table Header */}
+              <div className="grid grid-cols-2 border-b border-gray-200">
+                <div className="h-[37px] px-6 bg-gray-50 flex items-center">
+                  <h3 className="font-medium text-base text-gray-700">Files</h3>
+                </div>
+                <div className="h-[37px] px-6 bg-gray-50 flex items-center">
+                  <h3 className="font-medium text-base text-gray-700">
+                    Metadata
+                  </h3>
                 </div>
               </div>
 
-              {/* Right Side - Metadata Info */}
-              <div className="p-6">
-                {isExtracting ? (
-                  <div className="flex justify-center items-center py-8">
-                    <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mr-2"></div>
-                    <span className="text-gray-600">
-                      Extracting metadata...
-                    </span>
+              {/* Table Content */}
+              <div className="grid grid-cols-2 min-h-[400px]">
+                {/* Left Side - File Info */}
+                <div className="p-6 border-r border-gray-200 flex flex-col">
+                  <div className="flex items-center gap-3 p-4 bg-gray-50 rounded-lg">
+                    <div className="w-10 h-10 bg-red-500 rounded flex items-center justify-center">
+                      <span className="text-white text-xs font-bold">PDF</span>
+                    </div>
+                    <div className="flex-1">
+                      <p className="font-medium text-sm text-gray-800">
+                        {fileInfo?.name || selectedFile?.name || "Unknown file"}
+                      </p>
+                    </div>
+                    <button
+                      onClick={handleRemoveFile}
+                      className="p-2 text-gray-400 hover:text-red-500 transition-colors"
+                      title="Remove file"
+                    >
+                      <DelIcon className="text-[#AAAAAC] w-4 h-4 md:w-auto md:h-auto" />
+                    </button>
                   </div>
-                ) : processingState === "completed" ? (
-                  cleanedMetadata.length === 0 ? (
+                </div>
+
+                {/* Right Side - Metadata Info */}
+                <div className="p-6">
+                  {isExtracting ? (
+                    <div className="flex justify-center items-center py-8">
+                      <div className="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin mr-2"></div>
+                      <span className="text-gray-600">
+                        Extracting metadata...
+                      </span>
+                    </div>
+                  ) : processingState === "completed" ? (
+                    cleanedMetadata.length === 0 ? (
+                      <div className="text-center py-8 text-gray-500">
+                        No metadata available in cleaned file
+                      </div>
+                    ) : (
+                      <div className="space-y-3">
+                        {cleanedMetadata.map((item, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center py-2 border-b border-gray-100 last:border-b-0"
+                          >
+                            <span
+                              className="w-[150px] flex-shrink-0"
+                              style={{
+                                fontWeight: "400",
+                                fontSize: "14px",
+                                color: "#999999",
+                              }}
+                            >
+                              {item.key}
+                            </span>
+                            <span
+                              className="flex-1"
+                              style={{
+                                fontWeight: "500",
+                                fontSize: "14px",
+                                color: "#333333",
+                              }}
+                            >
+                              {item.value || "—"}
+                            </span>
+                          </div>
+                        ))}
+                      </div>
+                    )
+                  ) : metadata.length === 0 ? (
                     <div className="text-center py-8 text-gray-500">
-                      No metadata available in cleaned file
+                      No metadata available
                     </div>
                   ) : (
                     <div className="space-y-3">
-                      {cleanedMetadata.map((item, index) => (
+                      {metadata.map((item, index) => (
                         <div
                           key={index}
-                          className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
+                          className="flex items-center py-2 border-b border-gray-100 last:border-b-0"
                         >
-                          <span className="text-sm font-medium text-gray-600 min-w-[120px]">
+                          <span
+                            className="w-[150px] flex-shrink-0"
+                            style={{
+                              fontWeight: "400",
+                              fontSize: "14px",
+                              color: "#999999",
+                            }}
+                          >
                             {item.key}
                           </span>
-                          <span className="text-sm text-gray-800 text-right">
+                          <span
+                            className="flex-1"
+                            style={{
+                              fontWeight: "500",
+                              fontSize: "14px",
+                              color: "#333333",
+                            }}
+                          >
                             {item.value || "—"}
                           </span>
                         </div>
                       ))}
                     </div>
-                  )
-                ) : metadata.length === 0 ? (
-                  <div className="text-center py-8 text-gray-500">
-                    No metadata available
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    {metadata.map((item, index) => (
-                      <div
-                        key={index}
-                        className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
-                      >
-                        <span className="text-sm font-medium text-gray-600 min-w-[120px]">
-                          {item.key}
-                        </span>
-                        <span className="text-sm text-gray-800 text-right">
-                          {item.value || "—"}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                )}
+                  )}
+                </div>
               </div>
             </div>
 
             {/* Progress Bar */}
             {processingState === "processing" && (
-              <div className="px-6 pb-4">
+              <div className="rounded-lg px-6 py-4">
                 <div className="w-full bg-gray-200 rounded-full h-2">
                   <div
                     className="bg-green-500 h-2 rounded-full transition-all duration-300"
@@ -516,7 +546,7 @@ export default function MetadataRemoverPage() {
             )}
 
             {/* Action Buttons */}
-            <div className="flex flex-col items-center gap-4 p-6 border-t border-gray-200">
+            <div className="rounded-lg flex flex-col items-center">
               {processingState === "completed" && (
                 <span className="text-green-600 font-medium">
                   Metadata removed.
@@ -530,20 +560,28 @@ export default function MetadataRemoverPage() {
                     <span className="text-gray-600">Processing...</span>
                   </div>
                 ) : processingState === "completed" ? (
-                  <>
+                  <div className="mt-[30px] flex gap-[36px]">
                     <button
                       onClick={handleDownload}
-                      className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+                      className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md rounded-full font-semibold text-gray-900 transition"
+                      style={{
+                        width: "199px",
+                        height: "62px",
+                      }}
                     >
                       Download
                     </button>
                     <button
                       onClick={handleCancel}
-                      className="bg-gray-200 hover:bg-gray-300 shadow-md px-8 py-3 rounded-full font-semibold text-gray-700 transition"
+                      className="bg-gray-200 hover:bg-gray-300 shadow-md rounded-full font-semibold text-gray-700 transition"
+                      style={{
+                        width: "199px",
+                        height: "62px",
+                      }}
                     >
                       Cancel
                     </button>
-                  </>
+                  </div>
                 ) : (
                   <button
                     onClick={handleStart}
@@ -553,6 +591,7 @@ export default function MetadataRemoverPage() {
                       height: "62px",
                       background: "#F9D37A",
                       borderRadius: "32px",
+                      marginTop: "26px",
                     }}
                   >
                     Start
@@ -636,7 +675,13 @@ export default function MetadataRemoverPage() {
             </p>
             <button
               onClick={scrollToTop}
-              className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+              className="shadow-md font-semibold text-gray-900 transition"
+              style={{
+                width: "199px",
+                height: "62px",
+                background: "#F9D37A",
+                borderRadius: "32px",
+              }}
             >
               Try Now
             </button>
@@ -659,7 +704,13 @@ export default function MetadataRemoverPage() {
             </p>
             <button
               onClick={scrollToTop}
-              className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+              className="shadow-md font-semibold text-gray-900 transition"
+              style={{
+                width: "199px",
+                height: "62px",
+                background: "#F9D37A",
+                borderRadius: "32px",
+              }}
             >
               Try Now
             </button>
@@ -698,7 +749,13 @@ export default function MetadataRemoverPage() {
             </p>
             <button
               onClick={scrollToTop}
-              className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+              className="shadow-md font-semibold text-gray-900 transition"
+              style={{
+                width: "199px",
+                height: "62px",
+                background: "#F9D37A",
+                borderRadius: "32px",
+              }}
             >
               Try Now
             </button>
