@@ -44,3 +44,25 @@ export const downloadIntelMacVersion = () => {
     version: downloadConfig.version,
   });
 };
+
+export const downloadWindowsVersion = () => {
+  const downloadUrl = downloadConfig.windows;
+
+  if (!downloadUrl) {
+    console.error("No Windows version found");
+    return;
+  }
+
+  const link = document.createElement("a");
+  link.href = downloadUrl;
+  link.download = "WisFile.exe";
+  document.body.appendChild(link);
+  link.click();
+  document.body.removeChild(link);
+
+  logEvent("download", {
+    download_url: downloadUrl,
+    architecture: "windows",
+    version: downloadConfig.version,
+  });
+};

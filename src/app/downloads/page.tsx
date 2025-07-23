@@ -2,6 +2,7 @@
 import LazyImage from "@/components/LazyImage";
 import { message, Popover } from "antd";
 import { Download } from "@/components/download";
+import { downloadWindowsVersion } from "@/utils/download";
 
 export default function AboutPage() {
   const [messageApi, contextHolder] = message.useMessage();
@@ -85,10 +86,18 @@ export default function AboutPage() {
           <div className="mb-2 font-medium text-gray-700 text-lg">
             Download for
           </div>
-          <button className="bg-gray-200 mt-2 px-8 py-2 rounded-lg font-bold text-gray-500 text-lg cursor-not-allowed">
+          <button
+            onClick={downloadWindowsVersion}
+            className="hidden md:block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 px-8 py-2 rounded-lg font-bold text-white text-lg transition"
+          >
             Windows
           </button>
-          <span className="mt-2 text-gray-400 text-xs">Coming Soon</span>
+          <button
+            onClick={handleMobileDownload}
+            className="md:hidden block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 px-8 py-2 rounded-lg font-bold text-white text-lg transition"
+          >
+            Windows
+          </button>
         </div>
         {/* Linux Card */}
         <div className="flex flex-col flex-1 items-center bg-white shadow-md px-6 py-10 rounded-xl">

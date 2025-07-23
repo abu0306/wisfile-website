@@ -5,11 +5,7 @@ import Folder002 from "@/assets/svg/folder-002.svg";
 import Aos from "aos";
 import { useEffect } from "react";
 import Link from "next/link";
-import { message, Popover } from "antd";
-import { Download } from "@/components/download";
 export default function FileClassificationPage() {
-  const [messageApi, contextHolder] = message.useMessage();
-
   useEffect(() => {
     Aos.init({
       once: true,
@@ -18,15 +14,8 @@ export default function FileClassificationPage() {
     });
   }, []);
 
-  const handleMobileDownload = () => {
-    messageApi.open({
-      content: "Available on desktop only. Please use a laptop.",
-      duration: 5,
-    });
-  };
   return (
     <main className="flex flex-col items-center bg-[#FEFCF7] w-full min-h-screen">
-      {contextHolder}
       {/* Hero Section */}
       <section className="flex flex-col items-center mt-16 md:mt-24 mb-6 md:mb-12 px-4 md:px-0 max-w-6xl">
         <h1 className="mb-4 px-4 md:px-0 font-bold text-[#232323] text-[26px] md:text-5xl text-center leading-tight">
@@ -35,25 +24,22 @@ export default function FileClassificationPage() {
           <span className="md:hidden">into the correct folders</span>
           <span className="hidden md:inline">into the correct folders</span>
         </h1>
-        <div className="flex flex-row md:flex-row items-start md:items-center gap-4 mb-6 md:mb-16 px-4 md:px-0 w-full max-w-5xl">
-          <Popover arrow={false} placement={"bottom"} content={<Download />}>
+        <div className="flex flex-row md:flex-row justify-center items-start md:items-center gap-4 mb-6 md:mb-16 px-4 md:px-0 w-full max-w-5xl">
+          <Link href="/downloads">
             <button className="hidden md:block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
-              Download ( Mac )
+              Download
             </button>
-          </Popover>
-          <button
-            onClick={handleMobileDownload}
-            className="md:hidden block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md md:px-8 py-3 md:py-4 rounded-full md:w-auto h-[48px] text-gray-900 text-sm md:text-lg transition"
-          >
-            Download ( Mac )
-          </button>
-          <div className="flex-1">
-            <Link href={"/features/ai-renamer"} className="w-full md:w-auto">
-              <button className="flex justify-center items-center bg-transparent hover:bg-gray-100 md:px-8 py-3 md:py-4 border-2 border-gray-400 rounded-full w-full h-[48px] md:h-auto md:font-semibold text-gray-900 text-sm md:text-lg transition">
-                Online Demo
-              </button>
-            </Link>
-          </div>
+          </Link>
+          <Link href="/downloads">
+            <button className="md:hidden block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md md:px-8 py-3 md:py-4 rounded-full md:w-auto h-[48px] text-gray-900 text-sm md:text-lg transition">
+              Download
+            </button>
+          </Link>
+          <Link href={"/features/ai-renamer"} className="w-full md:w-auto">
+            <button className="flex justify-center items-center bg-transparent hover:bg-gray-100 md:px-8 py-3 md:py-4 border-2 border-gray-400 rounded-full w-full h-[48px] md:h-auto md:font-semibold text-gray-900 text-sm md:text-lg transition">
+              Online Demo
+            </button>
+          </Link>
         </div>
       </section>
 
@@ -74,17 +60,16 @@ export default function FileClassificationPage() {
               by topic, document type, or subject area. No tags, no rules — it
               just works.
             </p>
-            <Popover arrow={false} placement={"bottom"} content={<Download />}>
+            <Link href="/downloads">
               <button className="hidden md:block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-4 rounded-full font-semibold text-gray-900 text-lg transition">
                 Sorting Now
               </button>
-            </Popover>
-            <button
-              onClick={handleMobileDownload}
-              className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition"
-            >
-              Sorting Now
-            </button>
+            </Link>
+            <Link href="/downloads">
+              <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition">
+                Sorting Now
+              </button>
+            </Link>
           </div>
           <div
             className="flex flex-1 justify-center order-1 md:order-2 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -108,17 +93,16 @@ export default function FileClassificationPage() {
               Stop wasting time dragging files one by one. With a single click,
               turn chaotic downloads into a clean, structured library.
             </p>
-            <Popover arrow={false} placement={"bottom"} content={<Download />}>
+            <Link href="/downloads">
               <button className="hidden md:block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-4 rounded-full font-semibold text-gray-900 text-lg transition">
                 Sorting Now
               </button>
-            </Popover>
-            <button
-              onClick={handleMobileDownload}
-              className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition"
-            >
-              Sorting Now
-            </button>
+            </Link>
+            <Link href="/downloads">
+              <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-fit md:w-auto text-gray-900 text-sm md:text-lg transition">
+                Sorting Now
+              </button>
+            </Link>
           </div>
           <div
             className="flex flex-1 justify-center order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -146,25 +130,22 @@ export default function FileClassificationPage() {
         <div className="flex md:flex-row flex-col items-start md:items-center gap-2 md:gap-6 mb-6 md:mb-10 px-4 md:px-0 text-gray-700 text-lg md:text-xl text-left">
           locally, securely, and for free
         </div>
-        <div className="flex flex-row md:flex-row items-start md:items-center gap-4 md:mb-16 px-4 md:px-0 w-full max-w-5xl">
-          <Popover arrow={false} placement={"bottom"} content={<Download />}>
+        <div className="flex flex-row md:flex-row justify-center items-start md:items-center gap-4 md:mb-16 px-4 md:px-0 w-full max-w-5xl">
+          <Link href="/downloads">
             <button className="hidden md:block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-6 md:px-8 py-3 md:py-4 rounded-full w-full md:w-auto font-semibold text-gray-900 text-base md:text-lg transition">
-              Download ( Mac )
+              Download
             </button>
-          </Popover>
-          <button
-            onClick={handleMobileDownload}
-            className="md:hidden block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md md:px-8 py-3 md:py-4 rounded-full md:w-auto h-[48px] text-gray-900 text-sm md:text-lg transition"
-          >
-            Download ( Mac )
-          </button>
-          <div className="flex-1">
-            <Link href={"/features/ai-renamer"} className="w-full md:w-auto">
-              <button className="flex justify-center items-center bg-transparent hover:bg-gray-100 md:px-8 py-3 md:py-4 border-2 border-gray-400 rounded-full w-full h-[48px] md:h-auto md:font-semibold text-gray-900 text-sm md:text-lg transition">
-                Online Demo
-              </button>
-            </Link>
-          </div>
+          </Link>
+          <Link href="/downloads">
+            <button className="md:hidden block flex-1 bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md md:px-8 py-3 md:py-4 rounded-full md:w-auto h-[48px] text-gray-900 text-sm md:text-lg transition">
+              Download
+            </button>
+          </Link>
+          <Link href={"/features/ai-renamer"} className="w-full md:w-auto">
+            <button className="flex justify-center items-center bg-transparent hover:bg-gray-100 md:px-8 py-3 md:py-4 border-2 border-gray-400 rounded-full w-full h-[48px] md:h-auto md:font-semibold text-gray-900 text-sm md:text-lg transition">
+              Online Demo
+            </button>
+          </Link>
         </div>
       </section>
     </main>
