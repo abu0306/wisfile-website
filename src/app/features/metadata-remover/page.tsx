@@ -314,13 +314,38 @@ export default function MetadataRemoverPage() {
     <main className="flex flex-col items-center bg-[#FEFCF7] w-full min-h-screen">
       {/* Hero Section */}
       <section className="flex flex-col items-center mt-16 md:mt-24 px-4 md:px-0 max-w-6xl">
-        <h1 className="mb-4 px-4 md:px-0 font-bold text-[#232323] text-[32px] md:text-5xl text-center leading-tight">
+        <h1
+          className="mb-4 px-4 md:px-0"
+          style={{
+            fontWeight: "bold",
+            fontSize: "42px",
+            color: "#333333",
+            textAlign: "center",
+            fontStyle: "normal",
+          }}
+        >
           Metadata Remover
         </h1>
-        <p className="mb-2 px-4 md:px-0 text-gray-600 text-sm md:text-base text-center max-w-3xl">
+        <p
+          className="px-4 md:px-0 text-center max-w-3xl"
+          style={{
+            fontWeight: "400",
+            fontSize: "18px",
+            color: "#333333",
+            marginTop: "6px",
+            marginBottom: "22px",
+          }}
+        >
           Let AI strip your sensitive metadata, ensuring your privacy.
         </p>
-        <p className="mb-12 px-4 md:px-0 font-semibold text-gray-800 text-sm md:text-base text-center">
+        <p
+          className="mb-12 px-4 md:px-0 text-center"
+          style={{
+            fontWeight: "bold",
+            fontSize: "20px",
+            color: "#333333",
+          }}
+        >
           Totally for Free!
         </p>
       </section>
@@ -343,15 +368,33 @@ export default function MetadataRemoverPage() {
               <div className="flex flex-col items-center text-center">
                 {/* Upload Icon */}
                 <div className="mb-6">
-                  <UploadIcon className="w-16 h-16 text-[#FFD36A]" />
+                  <UploadIcon
+                    className="text-[#FFD36A]"
+                    style={{ width: "94px", height: "94px" }}
+                  />
                 </div>
 
                 {/* Text Content */}
-                <div className="space-y-2">
-                  <h3 className="text-lg font-medium text-gray-800">
+                <div>
+                  <h3
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "30px",
+                      color: "#999999",
+                    }}
+                  >
                     Only supports PDF format
                   </h3>
-                  <p className="text-sm text-gray-500">1 File One Time</p>
+                  <p
+                    style={{
+                      fontWeight: "400",
+                      fontSize: "14px",
+                      color: "#999999",
+                      marginTop: "28px",
+                    }}
+                  >
+                    1 File One Time
+                  </p>
                 </div>
               </div>
 
@@ -551,12 +594,20 @@ export default function MetadataRemoverPage() {
               100% Local & Free AI File Manager
             </h2>
             <p className="text-gray-600 text-sm md:text-base mb-6">
-              WisFile - A free local AI file manager with zero subscriptions,
-              obligations or usage limits. Files are safely, securely locally on
-              the fly.
+              Wisfile：A free local AI tool, which can auto-renames, categorizes
+              and organizes your files securely, turning chaos to clarity.
             </p>
             <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
+              <button
+                className="font-semibold text-gray-900 transition shadow-md"
+                style={{
+                  width: "333px",
+                  height: "48px",
+                  background:
+                    "linear-gradient(91deg, #FFDB49 0%, #FFF1B7 100%)",
+                  borderRadius: "24px",
+                }}
+              >
                 Try it for Free
               </button>
             </Link>
