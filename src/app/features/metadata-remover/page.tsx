@@ -28,6 +28,7 @@ export default function MetadataRemoverPage() {
   const [processingState, setProcessingState] =
     useState<ProcessingState>("idle");
   const [metadata, setMetadata] = useState<MetadataItem[]>([]);
+  const [cleanedMetadata, setCleanedMetadata] = useState<MetadataItem[]>([]);
   const [fileInfo, setFileInfo] = useState<FileInfo | null>(null);
   const [isExtracting, setIsExtracting] = useState(false);
   const [processingProgress, setProcessingProgress] = useState(0);
@@ -48,21 +49,18 @@ export default function MetadataRemoverPage() {
     return parseFloat((bytes / Math.pow(k, i)).toFixed(2)) + " " + sizes[i];
   };
 
-  const extractMetadata = async (file: File) => {
-    setIsExtracting(true);
+  // Generic function to extract metadata from PDF data
+  const extractPdfMetadata = async (
+    pdfData: ArrayBuffer | Uint8Array,
+    fileName: string,
+    fileSize: number
+  ): Promise<MetadataItem[]> => {
     try {
-      const arrayBuffer = await file.arrayBuffer();
-      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pdfDoc = await PDFDocument.load(pdfData);
 
       // Extract basic file info
       const pageCount = pdfDoc.getPageCount();
-      const fileSize = formatFileSize(file.size);
-
-      setFileInfo({
-        name: file.name,
-        size: fileSize,
-        pageCount: pageCount,
-      });
+      const fileSizeFormatted = formatFileSize(fileSize);
 
       // Extract metadata
       const metadataItems: MetadataItem[] = [];
@@ -119,12 +117,45 @@ export default function MetadataRemoverPage() {
       } catch {}
 
       // Add file-specific metadata
-      metadataItems.push({ key: "File Size", value: fileSize });
+      metadataItems.push({ key: "File Size", value: fileSizeFormatted });
       metadataItems.push({ key: "Page Count", value: pageCount.toString() });
 
       // Add some additional info
-      metadataItems.push({ key: "File Name", value: file.name });
+      metadataItems.push({ key: "File Name", value: fileName });
       metadataItems.push({ key: "File Type", value: "PDF Document" });
+
+      return metadataItems;
+    } catch (error) {
+      console.error("Error extracting metadata:", error);
+      return [
+        {
+          key: "Error",
+          value: "Failed to extract metadata from this PDF file",
+        },
+      ];
+    }
+  };
+
+  const extractMetadata = async (file: File) => {
+    setIsExtracting(true);
+    try {
+      const arrayBuffer = await file.arrayBuffer();
+      const metadataItems = await extractPdfMetadata(
+        arrayBuffer,
+        file.name,
+        file.size
+      );
+
+      // Set file info for display
+      const pdfDoc = await PDFDocument.load(arrayBuffer);
+      const pageCount = pdfDoc.getPageCount();
+      const fileSize = formatFileSize(file.size);
+
+      setFileInfo({
+        name: file.name,
+        size: fileSize,
+        pageCount: pageCount,
+      });
 
       setMetadata(metadataItems);
     } catch (error) {
@@ -137,6 +168,28 @@ export default function MetadataRemoverPage() {
       ]);
     } finally {
       setIsExtracting(false);
+    }
+  };
+
+  const extractCleanedMetadata = async (
+    cleanedPdfBytes: Uint8Array,
+    originalFileName: string
+  ) => {
+    try {
+      const metadataItems = await extractPdfMetadata(
+        cleanedPdfBytes,
+        originalFileName,
+        cleanedPdfBytes.length
+      );
+      setCleanedMetadata(metadataItems);
+    } catch (error) {
+      console.error("Error extracting cleaned metadata:", error);
+      setCleanedMetadata([
+        {
+          key: "Error",
+          value: "Failed to extract metadata from cleaned PDF file",
+        },
+      ]);
     }
   };
 
@@ -201,7 +254,10 @@ export default function MetadataRemoverPage() {
         // Save cleaned file data for download
         setCleanedFileData(cleanedPdfBytes);
 
-        // Set processing state to completed (no need to update metadata as we show simple success message)
+        // Extract metadata from cleaned file
+        await extractCleanedMetadata(cleanedPdfBytes, selectedFile.name);
+
+        // Set processing state to completed
         setProcessingState("completed");
       }
     } catch (error) {
@@ -216,6 +272,7 @@ export default function MetadataRemoverPage() {
     setProcessingState("idle");
     setProcessingProgress(0);
     setMetadata([]);
+    setCleanedMetadata([]);
     setFileInfo(null);
     setCleanedFileData(null);
   };
@@ -245,6 +302,7 @@ export default function MetadataRemoverPage() {
     setProcessingState("idle");
     setProcessingProgress(0);
     setMetadata([]);
+    setCleanedMetadata([]);
     setFileInfo(null);
     setCleanedFileData(null);
   };
@@ -377,14 +435,27 @@ export default function MetadataRemoverPage() {
                     </span>
                   </div>
                 ) : processingState === "completed" ? (
-                  <div className="flex items-center justify-center py-8">
-                    <div className="flex items-center gap-2">
-                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
-                      <span className="text-green-600 font-medium">
-                        Metadata Clear.
-                      </span>
+                  cleanedMetadata.length === 0 ? (
+                    <div className="text-center py-8 text-gray-500">
+                      No metadata available in cleaned file
                     </div>
-                  </div>
+                  ) : (
+                    <div className="space-y-3">
+                      {cleanedMetadata.map((item, index) => (
+                        <div
+                          key={index}
+                          className="flex justify-between items-center py-2 border-b border-gray-100 last:border-b-0"
+                        >
+                          <span className="text-sm font-medium text-gray-600 min-w-[120px]">
+                            {item.key}
+                          </span>
+                          <span className="text-sm text-gray-800 text-right">
+                            {item.value || "—"}
+                          </span>
+                        </div>
+                      ))}
+                    </div>
+                  )
                 ) : metadata.length === 0 ? (
                   <div className="text-center py-8 text-gray-500">
                     No metadata available
