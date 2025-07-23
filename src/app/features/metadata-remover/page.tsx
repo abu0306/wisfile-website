@@ -249,6 +249,13 @@ export default function MetadataRemoverPage() {
     setCleanedFileData(null);
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <main className="flex flex-col items-center bg-[#FEFCF7] w-full min-h-screen">
       {/* Hero Section */}
@@ -522,11 +529,12 @@ export default function MetadataRemoverPage() {
               metadata embedded in documents, such as author names, creation
               dates, and software versions.
             </p>
-            <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
-                Try Now
-              </button>
-            </Link>
+            <button
+              onClick={scrollToTop}
+              className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+            >
+              Try Now
+            </button>
           </div>
         </div>
 
@@ -544,11 +552,12 @@ export default function MetadataRemoverPage() {
               anonymity when sharing files (e.g., academic papers, business
               proposals, ensuring content is evaluated without bias).
             </p>
-            <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
-                Try Now
-              </button>
-            </Link>
+            <button
+              onClick={scrollToTop}
+              className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+            >
+              Try Now
+            </button>
           </div>
           <div
             className="flex flex-1 justify-center order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
@@ -582,11 +591,12 @@ export default function MetadataRemoverPage() {
               ensures reviewers focus solely on the content itself, preventing
               potential biases based on the author&apos;s background.
             </p>
-            <Link href="/downloads">
-              <button className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition">
-                Try Now
-              </button>
-            </Link>
+            <button
+              onClick={scrollToTop}
+              className="bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md px-8 py-3 rounded-full font-semibold text-gray-900 transition"
+            >
+              Try Now
+            </button>
           </div>
         </div>
       </section>
