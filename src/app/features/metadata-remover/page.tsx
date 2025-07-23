@@ -573,10 +573,12 @@ export default function MetadataRemoverPage() {
                     </button>
                     <button
                       onClick={handleCancel}
-                      className="bg-gray-200 hover:bg-gray-300 shadow-md rounded-full font-semibold text-gray-700 transition"
+                      className="shadow-md rounded-full font-semibold text-gray-700 transition"
                       style={{
                         width: "199px",
                         height: "62px",
+                        border: "1px solid #999999",
+                        color: "#999999",
                       }}
                     >
                       Cancel
