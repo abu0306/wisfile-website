@@ -46,16 +46,16 @@ export default function RootLayout({
           <QueryParamsHandler />
           <Nav />
           <a
-            href="https://www.producthunt.com/products/wisfile?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-wisfile"
+            href="https://www.producthunt.com/products/wisfile/reviews?utm_source=badge-product_review&utm_medium=badge&utm_source=badge-wisfile"
             target="_blank"
             className="top-14 md:top-[10px] right-6 md:right-8 z-50 fixed"
           >
             <LazyImage
-              src="/images/hunt.png"
+              src="/images/product_review.svg"
               alt="WisFile - 100% Local & Free AI File Manager for Docx and PDFs | Product Hunt"
-              width={295}
+              width={250}
               height={54}
-              className="w-[180px] md:w-[295px] h-fit scale-80"
+              className="w-[180px] md:w-[250px] h-fit scale-80"
             />
           </a>
           {children}
