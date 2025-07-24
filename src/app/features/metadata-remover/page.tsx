@@ -413,10 +413,10 @@ export default function MetadataRemoverPage() {
             <div className="bg-white rounded-lg border border-gray-200">
               {/* Table Header */}
               <div className="grid grid-cols-2 border-b border-gray-200">
-                <div className="h-[37px] px-6 bg-gray-50 flex items-center">
+                <div className="h-[37px] px-6 bg-gray-50 flex items-center rounded-tl-lg">
                   <h3 className="font-medium text-base text-gray-700">Files</h3>
                 </div>
-                <div className="h-[37px] px-6 bg-gray-50 flex items-center">
+                <div className="h-[37px] px-6 bg-gray-50 flex items-center rounded-tr-lg">
                   <h3 className="font-medium text-base text-gray-700">
                     Metadata
                   </h3>

@@ -18,12 +18,12 @@ export default function AboutPage() {
         </h1>
         <p className="mb-3 sm:mb-4 text-sm sm:text-base md:text-lg leading-relaxed">
           <span className="font-bold">Wisfile</span> is one of the first
-          products of Atom infinite, a trustworthy AI partner dedicated to
+          products of ATOM INFINITE, a trustworthy AI partner dedicated to
           solving real-world challenges with intelligent, user-centered
           technology.
         </p>
         <p className="mb-3 sm:mb-4 text-sm sm:text-base md:text-lg leading-relaxed">
-          At Atom infinite, we&apos;re driven by the belief that AI should solve
+          At ATOM INFINITE, we&apos;re driven by the belief that AI should solve
           real-world problems — simply, securely, and intelligently. Founded by
           a team of passionate innovators with strong academic backgrounds, we
           are committed to developing practical, privacy-conscious tools that
