@@ -47,7 +47,7 @@ export function ScenarioSection() {
           What can you do with us?
         </h2>
         {/* Tabs */}
-        <div className="flex md:flex-row flex-col gap-4 md:gap-10 mb-8 md:mb-10 border-b w-full overflow-x-auto">
+        <div className="flex md:flex-row flex-col gap-4 md:gap-10 mb-8 md:mb-10 border-b w-full overflow-x-auto justify-between">
           {scenarios.map((scenario, index) => (
             <button
               key={scenario.id}
