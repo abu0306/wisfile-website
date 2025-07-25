@@ -12,8 +12,8 @@ export default function AboutPage() {
           className="w-20 sm:w-32 h-20 sm:h-32"
         />
       </div>
-      <div className="flex flex-col items-start bg-transparent px-4 sm:px-0 w-full max-w-2xl">
-        <h1 className="mb-4 sm:mb-6 md:font-bold text-2xl sm:text-3xl md:text-5xl leading-tight">
+      <div className="flex flex-col items-start bg-transparent px-4 sm:px-0 w-full max-w-4xl">
+        <h1 className="mb-4 sm:mb-6 md:font-bold text-2xl sm:text-3xl md:text-5xl leading-tight text-center w-full">
           About Us
         </h1>
         <p className="mb-3 sm:mb-4 text-sm sm:text-base md:text-lg leading-relaxed">
