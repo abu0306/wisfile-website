@@ -81,9 +81,17 @@ export default function FileClassificationPage() {
           </div>
         </div>
         {/* Feature 2: Instant Folder Cleanup */}
-        <div className="flex md:flex-row-reverse flex-col justify-between items-center gap-8 md:gap-12">
+        <div className="flex md:flex-row flex-col justify-between items-center gap-8 md:gap-12">
           <div
-            className="flex flex-col flex-1 items-start order-2"
+            className="flex flex-1 justify-center order-1 md:order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
+            data-aos="fade-up-left"
+          >
+            <div className="w-full md:max-w-none">
+              <Folder002 className="w-full h-auto" />
+            </div>
+          </div>
+          <div
+            className="flex flex-col flex-1 items-start order-2 md:order-2"
             data-aos="zoom-out"
           >
             <h2 className="mb-2 font-bold text-lg md:text-xl">
@@ -103,14 +111,6 @@ export default function FileClassificationPage() {
                 Sorting Now
               </button>
             </Link>
-          </div>
-          <div
-            className="flex flex-1 justify-center order-1 bg-white [box-shadow:0px_35px_60px_0px_rgba(255,160,21,0.1)] p-[8px] md:p-[12px] border-[#FFB952] rounded-[16px] md:rounded-[20px] w-full md:w-auto"
-            data-aos="fade-up-right"
-          >
-            <div className="w-full md:max-w-none">
-              <Folder002 className="w-full h-auto" />
-            </div>
           </div>
         </div>
       </section>
