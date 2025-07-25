@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="flex flex-col bg-[#FEFCF7] px-4 min-h-screen">
       {/* Hero Section - 完全静态 */}
-      <section className="flex md:flex-row flex-col justify-center items-center gap-8 pt-[120px] md:pt-[180px] w-full">
+      <section className="flex md:flex-row flex-col justify-center items-center gap-8 pt-[120px] md:pt-[180px] w-full max-w-7xl mx-auto">
         {/* Left: Title, Subtitle, Buttons */}
         <div className="flex flex-col flex-1 justify-center items-start w-full max-w-2xl">
           {/* Hero Title */}
@@ -62,13 +62,13 @@ export default function Home() {
       <FeedbackSection />
 
       {/* FAQ Section - 完全静态 */}
-      <section className="flex flex-col items-center mt-9 md:mt-24 mb-16 md:mb-24 w-full">
+      <section className="flex flex-col items-center mt-9 md:mt-24 mb-16 md:mb-24 w-full max-w-7xl mx-auto">
         {/* Section Title */}
         <h2 className="mb-5 md:mb-12 px-4 font-bold text-[28px] md:text-[44px] text-center">
           Frequently Asked Questions
         </h2>
         {/* FAQ Cards */}
-        <div className="flex flex-col gap-6 md:gap-8 w-full max-w-4xl">
+        <div className="flex flex-col gap-6 md:gap-8 w-full">
           {/* FAQ Item 1 */}
           <div
             className="flex flex-col bg-white shadow-lg mb-2 p-6 md:p-8 rounded-2xl"
@@ -120,14 +120,14 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section - 完全静态 */}
-      <section className="flex flex-col items-center mx-auto md:mt-24 md:mb-12 max-w-6xl">
+      <section className="flex flex-col items-center mx-auto md:mt-24 md:mb-12 w-full max-w-7xl">
         <h1 className="mb-4 px-4 font-bold text-[#232323] text-3xl md:text-5xl text-center leading-tight">
           Tidy Your Files with <span className="text-[#FFA800]">AI</span>
         </h1>
         <p className="mb-6 px-4 text-gray-600 text-sm md:text-base text-center">
           100% Local & Free AI File Manager — No Fees, No Data Leaks.
         </p>
-        <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 mb-4 md:mb-16 w-full max-w-5xl">
+        <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 mb-4 md:mb-16 w-full">
           <DownloadSection />
           <Link href={"features/ai-renamer"} className="w-full md:w-auto">
             <button className="bg-transparent hover:bg-gray-100 px-6 md:px-8 py-3 md:py-4 border-2 border-gray-400 rounded-full w-full md:font-semibold text-gray-900 text-sm md:text-lg transition">

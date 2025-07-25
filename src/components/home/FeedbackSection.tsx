@@ -101,13 +101,13 @@ export function FeedbackSection() {
   return (
     <>
       {/* Desktop Version */}
-      <section className="hidden md:flex flex-col items-center mt-16 md:mt-24 w-full">
+      <section className="hidden md:flex flex-col items-center mt-16 md:mt-24 w-full max-w-7xl mx-auto">
         {/* Section Title */}
         <h2 className="mb-8 md:mb-12 px-4 font-bold text-[26px] md:text-[44px] text-center">
           Check Feedback from Our Users
         </h2>
         {/* Feedback Carousel */}
-        <div className="flex justify-center items-center w-full max-w-6xl">
+        <div className="flex justify-center items-center w-full">
           {/* Left Arrow */}
           <button
             className="flex justify-center items-center bg-[#FFF6E0] hover:bg-[#FFD36A] mr-2 md:mr-4 rounded-full w-8 md:w-10 h-8 md:h-10 text-[#FFA800] transition"
@@ -165,7 +165,7 @@ export function FeedbackSection() {
           </button>
         </div>
         {/* User Info Row */}
-        <div className="flex md:flex-row flex-col justify-center items-center gap-4 md:gap-8 mt-6 md:mt-8 w-full max-w-6xl">
+        <div className="flex md:flex-row flex-col justify-center items-center gap-4 md:gap-8 mt-6 md:mt-8 w-full">
           {feedbackGroups[currentGroup].map((fb, idx) => (
             <div key={idx} className="flex flex-col flex-1 items-center">
               <div className="font-semibold text-base md:text-lg">

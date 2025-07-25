@@ -41,13 +41,13 @@ export function ScenarioSection() {
   return (
     <>
       {/* Desktop Version */}
-      <section className="hidden md:flex flex-col items-center mt-9 md:mt-24 w-full">
+      <section className="hidden md:flex flex-col items-center mt-9 md:mt-24 w-full max-w-7xl mx-auto">
         {/* Section Title */}
         <h2 className="mb-8 md:mb-12 px-4 font-bold text-[28px] md:text-[44px] text-center">
           What can you do with us?
         </h2>
         {/* Tabs */}
-        <div className="flex md:flex-row flex-col gap-4 md:gap-10 mb-8 md:mb-10 border-b w-full max-w-5xl overflow-x-auto">
+        <div className="flex md:flex-row flex-col gap-4 md:gap-10 mb-8 md:mb-10 border-b w-full overflow-x-auto">
           {scenarios.map((scenario, index) => (
             <button
               key={scenario.id}
@@ -66,7 +66,7 @@ export function ScenarioSection() {
         </div>
         {/* Card */}
         <div
-          className="relative flex md:flex-row flex-col items-center gap-6 md:gap-8 bg-white p-6 md:p-10 w-full md:w-[1164px] h-auto md:h-[481px] overflow-hidden"
+          className="relative flex md:flex-row flex-col items-center gap-6 md:gap-8 bg-white p-6 md:p-10 w-full h-auto md:h-[481px] overflow-hidden"
           style={{
             boxShadow: "0px 35px 60px 0px rgba(255,160,21,0.1)",
             borderRadius: "20px 260px 20px 20px",
