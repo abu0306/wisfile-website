@@ -1,9 +1,16 @@
 export default function TermsOfService() {
   return (
-    <div style={{ maxWidth: 800, margin: "0 auto", padding: "2rem" }}>
+    <div
+      style={{
+        maxWidth: 800,
+        margin: "0 auto",
+        padding: "2rem",
+        paddingTop: "70px",
+      }}
+    >
       <h1>Wisfile User Agreement</h1>
       <p>
-        <strong>Effective Date: [Insert Date]</strong>
+        <strong>Effective Date: 2025-06-01</strong>
       </p>
       <p>
         Thank you for choosing Wisfile. Wisfile is a desktop application that

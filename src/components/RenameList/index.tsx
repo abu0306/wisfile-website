@@ -38,7 +38,7 @@ const RenameList = () => {
       </div>
       <div className="flex flex-col items-center">
         <span className="mt-[16px] md:mt-[24px] px-4 md:px-0 text-[#999] text-[14px] md:text-[18px] text-center whitespace-pre-wrap">
-          {`The Online Demo only provides simulated results, it won't change the names of local files. \nThe default naming format for simulation is "Article Title— Author".\nTo experience all models and features, please download the local version.`}
+          {`The Online Demo only provides simulated results, it won't change the names of local files. \nThe default naming format for simulation is "Article Title".\nTo experience all models and features, please download the local version.`}
         </span>
       </div>
     </div>
