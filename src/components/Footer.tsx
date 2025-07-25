@@ -4,8 +4,8 @@ import LazyImage from "@/components/LazyImage";
 export default function Footer() {
   return (
     <footer
-      className="flex flex-col items-center bg-white mt-12 pt-16 pb-8 rounded-t-[30px] md:rounded-t-[60px] w-full"
-      style={{ boxShadow: "0px -2px 24px 0px #E9E9E9" }}
+      className="flex flex-col items-center bg-white mt-12 pt-16 pb-8 w-full"
+      style={{ borderRadius: "121px 121px 0px 0px" }}
     >
       <div className="flex md:flex-row flex-col justify-between items-start md:items-start px-6 sm:px-8 w-full max-w-6xl">
         {/* Left: Logo and Navigation */}

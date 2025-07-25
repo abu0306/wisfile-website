@@ -52,30 +52,21 @@ export async function generateStaticParams() {
       // Remove duplicates
       const uniquePageIds = Array.from(new Set(pageIds));
 
-      // Validate each page exists before including it in static params
-      const validPageIds = [];
+      // Generate static params without validating each page individually
+      // Page validation will happen in the component itself when accessed
+      const staticParams = [];
       for (const pageId of uniquePageIds) {
-        try {
-          // Try to get the page to verify it exists
-          await notion.getPage(pageId);
-          const canonicalId = getCanonicalPageId(pageId, rootPage, {
-            uuid: true,
+        const canonicalId = getCanonicalPageId(pageId, rootPage, {
+          uuid: true,
+        });
+        if (canonicalId) {
+          staticParams.push({
+            blogPageId: canonicalId,
           });
-          if (canonicalId) {
-            validPageIds.push({
-              blogPageId: canonicalId,
-            });
-          }
-        } catch (error) {
-          // Skip pages that don't exist or can't be accessed
-          console.warn(
-            `Skipping page ${pageId} - not found or inaccessible:`,
-            error
-          );
         }
       }
 
-      return validPageIds;
+      return staticParams;
     } else {
       return [];
     }
