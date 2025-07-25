@@ -35,7 +35,7 @@ export function FileProvider({ children }: { children: React.ReactNode }) {
 
       dispatch(renameActions.addFiles(filesMetadata));
     },
-    [dispatch]
+    [dispatch, files]
   );
 
   const removeFile = useCallback(

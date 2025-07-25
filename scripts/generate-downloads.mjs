@@ -9,9 +9,11 @@ function generateDownloadConfig() {
     // 读取 downloads 目录
     const files = fs.readdirSync(downloadsDir);
 
-    // 过滤 WisFile dmg 文件
+    // 过滤 WisFile 文件（包括 dmg 和 exe）
     const wisFileFiles = files.filter(
-      (file) => file.startsWith("WisFile_") && file.endsWith(".dmg")
+      (file) =>
+        file.startsWith("WisFile_") &&
+        (file.endsWith(".dmg") || file.endsWith(".exe"))
     );
 
     // 找到对应的文件
@@ -19,15 +21,20 @@ function generateDownloadConfig() {
       file.includes("aarch64.dmg")
     );
     const x64File = wisFileFiles.find((file) => file.includes("x64.dmg"));
+    const windowsFile = wisFileFiles.find((file) => file.endsWith(".exe"));
 
     // 提取版本号
-    const versionMatch = aarch64File?.match(/WisFile_(\d+\.\d+\.\d+)_/);
+    const versionMatch =
+      aarch64File?.match(/WisFile_(\d+\.\d+\.\d+)_/) ||
+      x64File?.match(/WisFile_(\d+\.\d+\.\d+)_/) ||
+      windowsFile?.match(/WisFile_(\d+\.\d+\.\d+)_/);
     const version = versionMatch ? versionMatch[1] : "1.0.0";
 
     // 生成配置对象
     const config = {
       aarch64: aarch64File ? `/downloads/${aarch64File}` : null,
       x64: x64File ? `/downloads/${x64File}` : null,
+      windows: windowsFile ? `/downloads/${windowsFile}` : null,
       version: version,
     };
 
@@ -38,6 +45,7 @@ function generateDownloadConfig() {
 export interface DownloadConfig {
   aarch64: string | null;
   x64: string | null;
+  windows?: string | null;
   version: string;
 }
 
