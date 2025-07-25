@@ -18,40 +18,69 @@ export default async function BlogPage({
     return notFound();
   }
 
-  const recordMap = await notion.getPage(pageId);
+  try {
+    const recordMap = await notion.getPage(pageId);
 
-  return (
-    <div className="py-12 container-custom">
-      {/* Add your blog content rendering logic here */}
-      <div className="max-w-none prose">
-        <NotionPage recordMap={recordMap} rootPageId={rootNotionPageId} />
+    return (
+      <div className="py-12 container-custom">
+        {/* Add your blog content rendering logic here */}
+        <div className="max-w-none prose">
+          <NotionPage recordMap={recordMap} rootPageId={rootNotionPageId} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  } catch (error) {
+    console.error(`Error loading page ${pageId}:`, error);
+    return notFound();
+  }
 }
 
 export async function generateStaticParams() {
-  const rootPage = await notion.getPage(rootNotionPageId);
+  try {
+    const rootPage = await notion.getPage(rootNotionPageId);
 
-  if (rootPage.collection_view) {
-    // Collect all pageIds from all collection views
-    // Filter for table views since they have page_sort
-    const views = Object.values(rootPage.collection_view).map(
-      (collectionView) => collectionView as { value: { page_sort: string[] } }
-    );
+    if (rootPage.collection_view) {
+      // Collect all pageIds from all collection views
+      // Filter for table views since they have page_sort
+      const views = Object.values(rootPage.collection_view).map(
+        (collectionView) => collectionView as { value: { page_sort: string[] } }
+      );
 
-    // Get pageIds from all table views
-    const pageIds = views.flatMap((view) => view.value.page_sort ?? []);
+      // Get pageIds from all table views
+      const pageIds = views.flatMap((view) => view.value.page_sort ?? []);
 
-    // Remove duplicates
-    const uniquePageIds = Array.from(new Set(pageIds));
-    // Arry to map
-    return uniquePageIds.map((blogPageId) => {
-      return {
-        blogPageId: getCanonicalPageId(blogPageId, rootPage, { uuid: true }),
-      };
-    });
-  } else {
+      // Remove duplicates
+      const uniquePageIds = Array.from(new Set(pageIds));
+
+      // Validate each page exists before including it in static params
+      const validPageIds = [];
+      for (const pageId of uniquePageIds) {
+        try {
+          // Try to get the page to verify it exists
+          await notion.getPage(pageId);
+          const canonicalId = getCanonicalPageId(pageId, rootPage, {
+            uuid: true,
+          });
+          if (canonicalId) {
+            validPageIds.push({
+              blogPageId: canonicalId,
+            });
+          }
+        } catch (error) {
+          // Skip pages that don't exist or can't be accessed
+          console.warn(
+            `Skipping page ${pageId} - not found or inaccessible:`,
+            error
+          );
+        }
+      }
+
+      return validPageIds;
+    } else {
+      return [];
+    }
+  } catch (error) {
+    console.error("Error generating static params:", error);
     return [];
   }
 }
