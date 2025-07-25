@@ -62,13 +62,33 @@ export default function AboutPage() {
             Download for
           </div>
           <Popover arrow={false} placement={"bottom"} content={<Download />}>
-            <button className="hidden md:block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 px-8 py-2 rounded-lg font-bold text-white text-lg transition">
+            <button
+              className="hidden md:block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 transition"
+              style={{
+                width: "194px",
+                height: "62px",
+                borderRadius: "32px",
+                border: "1px solid rgba(255,255,255,0.5)",
+                fontWeight: "bold",
+                fontSize: "16px",
+                color: "#333333",
+              }}
+            >
               Mac
             </button>
           </Popover>
           <button
             onClick={handleMobileDownload}
-            className="md:hidden block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 px-8 py-2 rounded-lg font-bold text-white text-lg transition"
+            className="md:hidden block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 transition"
+            style={{
+              width: "194px",
+              height: "62px",
+              borderRadius: "32px",
+              border: "1px solid rgba(255,255,255,0.5)",
+              fontWeight: "bold",
+              fontSize: "16px",
+              color: "#333333",
+            }}
           >
             Mac
           </button>
@@ -88,13 +108,31 @@ export default function AboutPage() {
           </div>
           <button
             onClick={downloadWindowsVersion}
-            className="hidden md:block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 px-8 py-2 rounded-lg font-bold text-white text-lg transition"
+            className="hidden md:block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 transition"
+            style={{
+              width: "194px",
+              height: "62px",
+              borderRadius: "32px",
+              border: "1px solid rgba(255,255,255,0.5)",
+              fontWeight: "bold",
+              fontSize: "16px",
+              color: "#333333",
+            }}
           >
             Windows
           </button>
           <button
             onClick={handleMobileDownload}
-            className="md:hidden block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 px-8 py-2 rounded-lg font-bold text-white text-lg transition"
+            className="md:hidden block bg-[#FFB43A] hover:bg-[#e6a12e] shadow mt-2 transition"
+            style={{
+              width: "194px",
+              height: "62px",
+              borderRadius: "32px",
+              border: "1px solid rgba(255,255,255,0.5)",
+              fontWeight: "bold",
+              fontSize: "16px",
+              color: "#333333",
+            }}
           >
             Windows
           </button>
@@ -112,7 +150,18 @@ export default function AboutPage() {
           <div className="mb-2 font-medium text-gray-700 text-lg">
             Download for
           </div>
-          <button className="bg-gray-200 mt-2 px-8 py-2 rounded-lg font-bold text-gray-500 text-lg cursor-not-allowed">
+          <button
+            className="bg-gray-200 mt-2 cursor-not-allowed"
+            style={{
+              width: "194px",
+              height: "62px",
+              borderRadius: "32px",
+              border: "1px solid rgba(255,255,255,0.5)",
+              fontWeight: "400",
+              fontSize: "16px",
+              color: "#6C727F",
+            }}
+          >
             Linux
           </button>
           <span className="mt-2 text-gray-400 text-xs">Coming Soon</span>
