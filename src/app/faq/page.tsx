@@ -38,11 +38,8 @@ export default function FaqPage() {
   };
 
   return (
-    <div className="min-h-screen" style={{ backgroundColor: "#FEFCF7" }}>
-      <div
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8"
-        style={{ paddingTop: "125px" }}
-      >
+    <div className="min-h-screen bg-[#FEFCF7]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-[125px]">
         {/* Header */}
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-3">

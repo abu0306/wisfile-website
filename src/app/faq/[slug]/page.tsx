@@ -72,10 +72,7 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
     currentIndex < allFaqs.length - 1 ? allFaqs[currentIndex + 1] : null;
 
   return (
-    <article
-      className="min-h-screen overflow-x-hidden"
-      style={{ backgroundColor: "#FEFCF7", paddingTop: "125px" }}
-    >
+    <article className="min-h-screen overflow-x-hidden pt-[125px] bg-[#FEFCF7]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Article Content */}
         <div className="prose prose-lg max-w-none">
@@ -102,25 +99,13 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
             {prevFaq ? (
               <Link
                 href={`/faq/${prevFaq.slug}`}
-                className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md"
-                style={{
-                  width: "187px",
-                  height: "31px",
-                  borderRadius: "6px",
-                }}
+                className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
               >
                 <span>&lt;</span>
                 <span>Previous</span>
               </Link>
             ) : (
-              <span
-                className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md"
-                style={{
-                  width: "187px",
-                  height: "31px",
-                  borderRadius: "6px",
-                }}
-              >
+              <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
                 <span>&lt;</span>
                 <span>Previous</span>
               </span>
@@ -129,25 +114,13 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
             {nextFaq ? (
               <Link
                 href={`/faq/${nextFaq.slug}`}
-                className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md"
-                style={{
-                  width: "187px",
-                  height: "31px",
-                  borderRadius: "6px",
-                }}
+                className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
               >
                 <span>Next</span>
                 <span>&gt;</span>
               </Link>
             ) : (
-              <span
-                className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md"
-                style={{
-                  width: "187px",
-                  height: "31px",
-                  borderRadius: "6px",
-                }}
-              >
+              <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
                 <span>Next</span>
                 <span>&gt;</span>
               </span>
