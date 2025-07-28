@@ -66,12 +66,11 @@ export default function Pagination({
           disabled={typeof page !== "number"}
           className={`px-3 py-2 text-sm font-medium rounded-md ${
             page === currentPage
-              ? "text-white"
+              ? "text-white bg-[#FFA015]"
               : typeof page === "number"
               ? "text-gray-700 hover:text-[#FFA015] hover:bg-orange-50"
               : "text-gray-400 cursor-default"
           }`}
-          style={page === currentPage ? { backgroundColor: "#FFA015" } : {}}
         >
           {page}
         </button>
