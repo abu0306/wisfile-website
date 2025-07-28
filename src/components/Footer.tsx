@@ -51,7 +51,7 @@ export default function Footer() {
                 Metadata Remover
               </a>
             </div>
-            {/* Right Column: Blog, Downloads, About Us */}
+            {/* Right Column: Blog, Downloads, About Us, FAQ */}
             <div className="flex flex-col gap-4 md:gap-2 text-left md:text-left">
               <a
                 href="/blog"
@@ -70,6 +70,12 @@ export default function Footer() {
                 className="font-medium text-gray-600 hover:text-[#FFA800] text-base md:text-lg transition-colors duration-200"
               >
                 About Us
+              </a>
+              <a
+                href="/faq"
+                className="font-medium text-gray-600 hover:text-[#FFA800] text-base md:text-lg transition-colors duration-200"
+              >
+                FAQ
               </a>
             </div>
           </div>
