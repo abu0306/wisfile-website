@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import RecommendBanner from "@/components/faq/RecommendBanner";
+import { HomeOutlined } from "@ant-design/icons";
 
 interface FaqPageProps {
   params: Promise<{
@@ -103,11 +104,44 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
           <div className="prose prose-lg max-w-none">
             <div
               className="text-gray-800 leading-relaxed
-                [&>h1]:w-screen [&>h1]:relative [&>h1]:left-1/2 [&>h1]:-translate-x-1/2 [&>h1]:bg-white [&>h1]:h-[171px] [&>h1]:flex [&>h1]:items-center [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-8
+                [&>h1]:w-screen [&>h1]:relative [&>h1]:left-1/2 [&>h1]:-translate-x-1/2 [&>h1]:bg-white [&>h1]:h-[171px] [&>h1]:flex [&>h1]:flex-col [&>h1]:justify-center [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-8
                 [&>h1]:pl-[max(1rem,calc((100vw-1280px)/2+1rem))] [&>h1]:sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] [&>h1]:lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]
                 [&>*:not(h1)]:hidden"
               dangerouslySetInnerHTML={{ __html: faq.content }}
             />
+            {/* Breadcrumb Navigation - positioned over the h1 */}
+            <div className="w-screen relative left-1/2 -translate-x-1/2 bg-white h-[171px] flex flex-col justify-center -mt-[171px] mb-8 pl-[max(1rem,calc((100vw-1280px)/2+1rem))] sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]">
+              {/* Breadcrumb */}
+              <nav className="mb-4" aria-label="Breadcrumb">
+                <div className="flex items-center text-sm text-gray-600">
+                  <Link
+                    href="/"
+                    className="hover:text-gray-900 transition-colors inline-flex items-center"
+                    style={{ paddingBottom: "2px" }}
+                  >
+                    <HomeOutlined
+                      className="text-sm"
+                      style={{ lineHeight: 1 }}
+                    />
+                  </Link>
+                  <span className="mx-2">/</span>
+                  <Link
+                    href="/faq"
+                    className="hover:text-gray-900 transition-colors"
+                  >
+                    FAQ
+                  </Link>
+                  <span className="mx-2">/</span>
+                  <span className="text-gray-900 font-medium truncate max-w-[200px] sm:max-w-[300px] lg:max-w-[400px]">
+                    {faq.question}
+                  </span>
+                </div>
+              </nav>
+              {/* Title */}
+              <h1 className="text-3xl font-bold text-gray-900">
+                {faq.question}
+              </h1>
+            </div>
           </div>
         </div>
 
