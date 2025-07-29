@@ -154,6 +154,12 @@ export function Nav() {
                 Download
               </Link>
               <Link
+                href="/faq"
+                className="px-3 py-2 rounded-md font-medium text-gray-900 hover:text-gray-500 text-sm"
+              >
+                FAQ
+              </Link>
+              <Link
                 href="/about"
                 className="px-3 py-2 rounded-md font-medium text-gray-900 hover:text-gray-500 text-sm"
               >
@@ -274,6 +280,13 @@ export function Nav() {
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Download
+              </Link>
+              <Link
+                href="/faq"
+                className="block px-0 py-2 rounded-md font-medium text-gray-900 hover:text-gray-500 text-base"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                FAQ
               </Link>
               <Link
                 href="/about"
