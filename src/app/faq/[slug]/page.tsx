@@ -3,6 +3,7 @@ import { getFaqBySlug, getAllFaqs } from "@/types/faq";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import RecommendBanner from "@/components/faq/RecommendBanner";
 
 interface FaqPageProps {
   params: Promise<{
@@ -97,28 +98,52 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
           faq.headerImageUrl ? "pt-8" : "pt-[125px]"
         }`}
       >
-        {/* Article Content */}
-        <div className="prose prose-lg max-w-none">
-          <div
-            className="text-gray-800 leading-relaxed
-              [&>p]:mb-6 [&>p]:text-base [&>p]:leading-7
-              [&>h1]:text-2xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mt-8 [&>h1]:mb-4
-              [&>h2]:w-screen [&>h2]:relative [&>h2]:left-1/2 [&>h2]:-translate-x-1/2 [&>h2]:bg-white [&>h2]:h-[171px] [&>h2]:flex [&>h2]:items-center [&>h2]:text-3xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mb-8
-              [&>h2]:pl-[max(1rem,calc((100vw-1280px)/2+1rem))] [&>h2]:sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] [&>h2]:lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]
-              [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-gray-900 [&>h3]:mt-5 [&>h3]:mb-2
-              [&>ul]:mb-6 [&>ol]:mb-6 [&>li]:mb-2
-              [&>a]:text-blue-600 [&>a]:hover:text-blue-700
-              [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600
-              [&>code]:bg-gray-100 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-red-600
-              [&>pre]:bg-gray-100 [&>pre]:p-4 [&>pre]:rounded [&>pre]:overflow-x-auto
-              [&>img]:max-w-full [&>img]:h-auto [&>img]:my-6 [&>img]:mx-auto [&>img]:rounded-lg [&>img]:shadow-md [&>img]:block
-              [&_strong]:font-bold [&_strong]:text-gray-900"
-            dangerouslySetInnerHTML={{ __html: faq.content }}
-          />
+        {/* Article Title - Full Width */}
+        <div className="mb-8">
+          <div className="prose prose-lg max-w-none">
+            <div
+              className="text-gray-800 leading-relaxed
+                [&>h1]:w-screen [&>h1]:relative [&>h1]:left-1/2 [&>h1]:-translate-x-1/2 [&>h1]:bg-white [&>h1]:h-[171px] [&>h1]:flex [&>h1]:items-center [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-8
+                [&>h1]:pl-[max(1rem,calc((100vw-1280px)/2+1rem))] [&>h1]:sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] [&>h1]:lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]
+                [&>*:not(h1)]:hidden"
+              dangerouslySetInnerHTML={{ __html: faq.content }}
+            />
+          </div>
         </div>
 
-        {/* Navigation */}
-        <div className="mt-12 pt-8">
+        {/* Main Content Area - Two Column Layout */}
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Left Column - Article Content */}
+          <div className="flex-1 lg:max-w-[calc(100%-450px)]">
+            <div className="prose prose-lg max-w-none">
+              <div
+                className="text-gray-800 leading-relaxed
+                  [&>h1]:hidden
+                  [&>p]:mb-6 [&>p]:text-base [&>p]:leading-7
+                  [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mt-8 [&>h2]:mb-4
+                  [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-gray-900 [&>h3]:mt-5 [&>h3]:mb-2
+                  [&>ul]:mb-6 [&>ol]:mb-6 [&>li]:mb-2
+                  [&>a]:text-blue-600 [&>a]:hover:text-blue-700
+                  [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600
+                  [&>code]:bg-gray-100 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-red-600
+                  [&>pre]:bg-gray-100 [&>pre]:p-4 [&>pre]:rounded [&>pre]:overflow-x-auto
+                  [&>img]:max-w-full [&>img]:h-auto [&>img]:my-6 [&>img]:mx-auto [&>img]:rounded-lg [&>img]:shadow-md [&>img]:block
+                  [&_strong]:font-bold [&_strong]:text-gray-900"
+                dangerouslySetInnerHTML={{ __html: faq.content }}
+              />
+            </div>
+          </div>
+
+          {/* Right Column - Recommend Banner */}
+          <div className="w-full lg:w-[402px] flex-shrink-0 flex justify-center lg:justify-start">
+            <div className="lg:sticky lg:top-8">
+              <RecommendBanner />
+            </div>
+          </div>
+        </div>
+
+        {/* Navigation - Full Width */}
+        <div className="mt-12 pt-8 w-full">
           <div className="flex items-center justify-center gap-8">
             {prevFaq ? (
               <Link
