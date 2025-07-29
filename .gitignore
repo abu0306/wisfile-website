@@ -37,6 +37,6 @@ next-env.d.ts
 .env
 package-lock.json
 
-# auto-generated files
-/public/sitemap.xml
-/public/robots.txt
+# auto-generated files (manually managed now)
+# /public/sitemap.xml
+# /public/robots.txt
