@@ -1,0 +1,58 @@
+/* Recommend Banner Button - High Priority Styles */
+.recommendBannerButton {
+  width: 366px !important;
+  height: 48px !important;
+  background: linear-gradient(91deg, #ffdb49 0%, #fff1b7 100%) !important;
+  border-radius: 24px !important;
+  border: 1px solid #fbbf24 !important;
+  font-size: 16px !important;
+  color: #333333 !important;
+  text-align: center !important;
+  font-weight: 500 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+/* Question Text Styles */
+.questionText {
+  font-weight: 400;
+  font-size: 16px;
+  color: #999999;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Title Styles */
+.titleText {
+  font-size: 20px;
+  color: #333333;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+/* Subtitle Styles */
+.subtitleText {
+  font-weight: 500;
+  font-size: 18px;
+  color: #333333;
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+/* Description Styles */
+.descriptionText {
+  font-weight: 400;
+  font-size: 14px;
+  color: #666666;
+  text-align: center;
+  margin-bottom: 32px;
+  padding: 0 8px;
+  line-height: 1.5;
+}
+
+/* Container Styles */
+.bannerContainer {
+  padding: 16px !important;
+}

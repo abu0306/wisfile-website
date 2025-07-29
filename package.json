@@ -31,8 +31,10 @@
     "react-dom": "^18",
     "react-notion-x": "^7.4.2",
     "react-redux": "^9.2.0",
+    "rehype-stringify": "^10.0.1",
     "remark": "^15.0.1",
-    "remark-html": "^16.0.1",
+    "remark-gfm": "^4.0.1",
+    "remark-rehype": "^11.1.2",
     "sass": "^1.89.2",
     "swiper": "^11.2.8"
   },

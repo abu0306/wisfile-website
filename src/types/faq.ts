@@ -6,6 +6,7 @@ export interface FaqItem {
   description: string;
   keywords: string[];
   content: string; // HTML content after markdown processing
+  headerImageUrl: string; // Header image URL
 }
 
 export interface FaqMeta {
@@ -14,6 +15,7 @@ export interface FaqMeta {
   title: string;
   description: string;
   keywords: string[];
+  headerImageUrl: string; // Header image URL
 }
 
 // FAQ 数据处理函数
@@ -26,6 +28,7 @@ interface JsonFaqItem {
   title: string;
   description: string;
   Keywords: string;
+  headerImageUrl: string;
 }
 
 // 生成 slug
@@ -51,6 +54,7 @@ export function getAllFaqs(): FaqMeta[] {
       keywords: item.Keywords
         ? item.Keywords.split(",").map((k) => k.trim())
         : [],
+      headerImageUrl: item.headerImageUrl,
     }));
   } catch (error) {
     console.error("Error reading FAQ data:", error);
@@ -83,6 +87,7 @@ export async function getFaqBySlug(slug: string): Promise<FaqItem | null> {
         ? item.Keywords.split(",").map((k) => k.trim())
         : [],
       content: htmlContent,
+      headerImageUrl: item.headerImageUrl,
     };
   } catch (error) {
     console.error("Error reading FAQ item:", error);
