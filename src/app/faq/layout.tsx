@@ -1,50 +1,34 @@
-import { rootNotionPageId } from "@/lib/config";
-import notion from "@/lib/notion-api";
-import NotionPage from "@/components/NotionPage";
-import "react-notion-x/src/styles.css";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog | WisFile: Tidy Your Files with AI",
+  title: "FAQ | WisFile: Tidy Your Files with AI",
   description:
     "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
     "Automatically generates clear, consistent filenames based on content. " +
     "Instantly sorts your files into logical folders for easy access. " +
     "All operations run on your device — no cloud, no data leaks.",
   alternates: {
-    canonical: "https://www.wisfile.ai/blog",
+    canonical: "https://www.wisfile.ai/faq",
   },
   openGraph: {
-    title: "Blog | WisFile: Tidy Your Files with AI",
+    title: "FAQ | WisFile: Tidy Your Files with AI",
     description:
       "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
-    url: "https://www.wisfile.ai/blog",
+    url: "https://www.wisfile.ai/faq",
     siteName: "WisFile",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     site: "@Wisfileofficial",
-    title: "Blog | WisFile: Tidy Your Files with AI",
+    title: "FAQ | WisFile: Tidy Your Files with AI",
     description:
       "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
   },
 };
 
-// This is a Server Component by default
-export default async function BlogPage() {
-  const pageId = rootNotionPageId;
-  console.log(pageId);
-  const recordMap = await notion.getPage(pageId);
-
-  return (
-    <div className="container-custom py-12">
-      {/* Add your blog content rendering logic here */}
-      <div className="prose max-w-none">
-        <NotionPage recordMap={recordMap} rootPageId={rootNotionPageId} />
-      </div>
-    </div>
-  );
+export default function FaqLayout({ children }: { children: React.ReactNode }) {
+  return <>{children}</>;
 }
