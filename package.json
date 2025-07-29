@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "node scripts/generate-downloads.mjs && next build && next-sitemap",
+    "build": "node scripts/generate-downloads.mjs && next build",
     "prebuild": "node scripts/generate-downloads.mjs",
     "start": "next start",
     "lint": "next lint",
