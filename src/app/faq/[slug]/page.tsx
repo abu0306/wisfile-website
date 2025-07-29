@@ -35,7 +35,8 @@ export async function generateMetadata({
     title: `${faq.question} | WisFile: Tidy Your Files with AI`,
     description: faq.description,
     keywords:
-      faq.keywords.join(",") + ",WisFile,file orgCanonical URLanization,AI file manager",
+      faq.keywords.join(",") +
+      ",WisFile,file orgCanonical URLanization,AI file manager",
     authors: [{ name: "WisFile Team" }],
     creator: "WisFile",
     publisher: "WisFile",
@@ -92,6 +93,7 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
               [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600
               [&>code]:bg-gray-100 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-red-600
               [&>pre]:bg-gray-100 [&>pre]:p-4 [&>pre]:rounded [&>pre]:overflow-x-auto
+              [&>img]:max-w-full [&>img]:h-auto [&>img]:my-6 [&>img]:mx-auto [&>img]:rounded-lg [&>img]:shadow-md [&>img]:block
               [&_strong]:font-bold [&_strong]:text-gray-900"
             dangerouslySetInnerHTML={{ __html: faq.content }}
           />
