@@ -32,25 +32,29 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${faq.question} | WisFile FAQ`,
+    title: `${faq.question} | WisFile: Tidy Your Files with AI`,
     description: faq.description,
     keywords:
-      faq.keywords.join(",") + ",WisFile,file organization,AI file manager",
+      faq.keywords.join(",") + ",WisFile,file orgCanonical URLanization,AI file manager",
     authors: [{ name: "WisFile Team" }],
     creator: "WisFile",
     publisher: "WisFile",
     robots: "index, follow",
+    alternates: {
+      canonical: `https://www.wisfile.ai/faq/${slug}`,
+    },
     openGraph: {
       type: "article",
       locale: "en_US",
-      url: `https://wisfile.ai/faq/${slug}`,
-      title: faq.question,
+      url: `https://www.wisfile.ai/faq/${slug}`,
+      title: `${faq.question} | WisFile: Tidy Your Files with AI`,
       description: faq.description,
       siteName: "WisFile",
     },
     twitter: {
       card: "summary_large_image",
-      title: faq.question,
+      site: "@Wisfileofficial",
+      title: `${faq.question} | WisFile: Tidy Your Files with AI`,
       description: faq.description,
     },
   };
