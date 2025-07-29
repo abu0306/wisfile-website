@@ -132,6 +132,41 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
                 dangerouslySetInnerHTML={{ __html: faq.content }}
               />
             </div>
+
+            {/* Navigation - Article Content Area */}
+            <div className="mt-12 pt-8">
+              <div className="flex items-center justify-center gap-8">
+                {prevFaq ? (
+                  <Link
+                    href={`/faq/${prevFaq.slug}`}
+                    className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
+                  >
+                    <span>&lt;</span>
+                    <span>Previous</span>
+                  </Link>
+                ) : (
+                  <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
+                    <span>&lt;</span>
+                    <span>Previous</span>
+                  </span>
+                )}
+
+                {nextFaq ? (
+                  <Link
+                    href={`/faq/${nextFaq.slug}`}
+                    className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
+                  >
+                    <span>Next</span>
+                    <span>&gt;</span>
+                  </Link>
+                ) : (
+                  <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
+                    <span>Next</span>
+                    <span>&gt;</span>
+                  </span>
+                )}
+              </div>
+            </div>
           </div>
 
           {/* Right Column - Recommend Banner */}
@@ -139,41 +174,6 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
             <div className="lg:sticky lg:top-8">
               <RecommendBanner />
             </div>
-          </div>
-        </div>
-
-        {/* Navigation - Full Width */}
-        <div className="mt-12 pt-8 w-full">
-          <div className="flex items-center justify-center gap-8">
-            {prevFaq ? (
-              <Link
-                href={`/faq/${prevFaq.slug}`}
-                className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
-              >
-                <span>&lt;</span>
-                <span>Previous</span>
-              </Link>
-            ) : (
-              <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
-                <span>&lt;</span>
-                <span>Previous</span>
-              </span>
-            )}
-
-            {nextFaq ? (
-              <Link
-                href={`/faq/${nextFaq.slug}`}
-                className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
-              >
-                <span>Next</span>
-                <span>&gt;</span>
-              </Link>
-            ) : (
-              <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
-                <span>Next</span>
-                <span>&gt;</span>
-              </span>
-            )}
           </div>
         </div>
       </div>
