@@ -1,6 +1,7 @@
 import { notFound } from "next/navigation";
 import { getFaqBySlug, getAllFaqs } from "@/types/faq";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 interface FaqPageProps {
@@ -77,8 +78,25 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
     currentIndex < allFaqs.length - 1 ? allFaqs[currentIndex + 1] : null;
 
   return (
-    <article className="min-h-screen overflow-x-hidden pt-[125px] bg-[#FEFCF7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <article className="min-h-screen overflow-x-hidden bg-[#FEFCF7]">
+      {/* Header Image */}
+      {faq.headerImageUrl && (
+        <div className="w-full h-[257px] relative overflow-hidden mt-[125px]">
+          <Image
+            src={faq.headerImageUrl}
+            alt={faq.question}
+            fill
+            className="object-cover"
+            priority
+          />
+        </div>
+      )}
+
+      <div
+        className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 ${
+          faq.headerImageUrl ? "pt-8" : "pt-[125px]"
+        }`}
+      >
         {/* Article Content */}
         <div className="prose prose-lg max-w-none">
           <div
