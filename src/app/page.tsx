@@ -35,8 +35,8 @@ export default function Home() {
           {/* Buttons */}
           <div className="flex flex-row md:flex-row items-start md:items-center gap-4 mb-6 md:mb-16 w-full max-w-5xl">
             <DownloadSection />
-            <Link href={"features/ai-renamer"} className="w-full md:w-auto">
-              <button className="bg-transparent hover:bg-gray-100 px-6 md:px-8 py-3 md:py-4 border-2 border-gray-400 rounded-full w-full md:font-semibold text-gray-900 text-sm md:text-lg transition">
+            <Link href={"features/ai-renamer"}>
+              <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full font-semibold text-gray-900 text-sm md:text-lg transition w-[199px] h-[62px]">
                 Online Demo
               </button>
             </Link>
@@ -129,8 +129,8 @@ export default function Home() {
         </p>
         <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 mb-4 md:mb-16 w-full">
           <DownloadSection />
-          <Link href={"features/ai-renamer"} className="w-full md:w-auto">
-            <button className="bg-transparent hover:bg-gray-100 px-6 md:px-8 py-3 md:py-4 border-2 border-gray-400 rounded-full w-full md:font-semibold text-gray-900 text-sm md:text-lg transition">
+          <Link href={"features/ai-renamer"}>
+            <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full font-semibold text-gray-900 text-sm md:text-lg transition w-[199px] h-[62px]">
               Online Demo
             </button>
           </Link>
