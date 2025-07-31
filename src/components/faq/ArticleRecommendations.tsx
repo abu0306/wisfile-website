@@ -27,10 +27,7 @@ const ArticleRecommendations: React.FC<ArticleRecommendationsProps> = ({
 
             <div className="relative pl-6">
               {/* 左侧竖条 - 从标题下方开始 */}
-              <div
-                className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#E9EAEE]"
-                style={{ width: "2px" }}
-              ></div>
+              <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-[#E9EAEE]"></div>
 
               <div className="space-y-2.5">
                 {series.slice(0, 5).map((article) => (
