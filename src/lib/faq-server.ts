@@ -6,6 +6,7 @@ import {
   searchFaqs as searchFaqsFromLoader,
 } from "@/lib/faq-loader";
 import { FaqItem, FaqMeta } from "@/types/faq";
+import { getRecommendationService } from "@/lib/recommendation-service";
 
 /**
  * 获取所有FAQ的元数据（服务器端）
@@ -97,5 +98,25 @@ export function getFeaturedFaqs(): FaqMeta[] {
   } catch (error) {
     console.error("Error getting featured FAQs:", error);
     return [];
+  }
+}
+
+/**
+ * 获取文章推荐（服务器端）
+ */
+export function getArticleRecommendations(articleId: number): {
+  series: FaqMeta[];
+  continueReading: FaqMeta[];
+} {
+  try {
+    const allFaqs = getAllFaqs();
+    const recommendationService = getRecommendationService();
+    return recommendationService.getRecommendations(articleId, allFaqs);
+  } catch (error) {
+    console.error("Error getting article recommendations:", error);
+    return {
+      series: [],
+      continueReading: [],
+    };
   }
 }
