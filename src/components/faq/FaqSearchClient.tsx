@@ -35,7 +35,7 @@ export default function FaqSearchClient({ initialFaqs }: FaqSearchClientProps) {
       {/* FAQ List */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 mb-8">
         {paginatedFaqs.map((faq) => (
-          <FaqCard key={faq.slug} faq={faq} />
+          <FaqCard key={faq.id} faq={faq} />
         ))}
       </div>
 
