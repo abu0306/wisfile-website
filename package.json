@@ -8,7 +8,9 @@
     "prebuild": "node scripts/generate-downloads.mjs",
     "start": "next start",
     "lint": "next lint",
-    "lint:fix": "next lint --fix"
+    "lint:fix": "next lint --fix",
+    "process-excel": "node scripts/process-excel-to-chunks.js",
+    "verify-chunks": "node scripts/verify-chunks.js"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.2",
@@ -36,7 +38,8 @@
     "remark-gfm": "^4.0.1",
     "remark-rehype": "^11.1.2",
     "sass": "^1.89.2",
-    "swiper": "^11.2.8"
+    "swiper": "^11.2.8",
+    "xlsx": "^0.18.5"
   },
   "devDependencies": {
     "@types/aos": "^3.0.7",
@@ -48,6 +51,7 @@
     "eslint-config-next": "14.2.29",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
-    "typescript": "^5"
+    "typescript": "^5",
+    "xlsx": "^0.18.5"
   }
 }
