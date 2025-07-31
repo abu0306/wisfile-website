@@ -1,14 +1,14 @@
 "use client";
 
 import { useState, useMemo } from "react";
-import { FaqSearchClient } from "@/components/faq";
 import { FaqMeta } from "@/types/faq";
+import FaqSearchClient from "./FaqSearchClient";
 
 interface FaqPageClientProps {
   initialFaqs: FaqMeta[];
 }
 
-export function FaqPageClient({ initialFaqs }: FaqPageClientProps) {
+export default function FaqPageClient({ initialFaqs }: FaqPageClientProps) {
   const [searchQuery, setSearchQuery] = useState("");
   const [isSearching, setIsSearching] = useState(false);
 
@@ -41,14 +41,14 @@ export function FaqPageClient({ initialFaqs }: FaqPageClientProps) {
   };
 
   return (
-    <div className="min-h-screen bg-[#FEFCF7]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-[125px]">
+    <div className="bg-[#FEFCF7] min-h-screen">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 py-8 pt-[125px] max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-3xl font-bold text-gray-900 mb-3">
+        <div className="mb-8 text-center">
+          <h1 className="mb-3 font-bold text-gray-900 text-3xl">
             Frequently Asked Questions
           </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto text-sm">
+          <p className="mx-auto max-w-2xl text-gray-600 text-sm">
             Explore smart renaming, real use cases, and the full potential of
             local AI file management with WisFile.
           </p>
@@ -62,11 +62,11 @@ export function FaqPageClient({ initialFaqs }: FaqPageClientProps) {
               placeholder="Search content"
               value={searchQuery}
               onChange={(e) => handleSearch(e.target.value)}
-              className="block w-full pl-4 pr-12 py-3 border border-gray-300 rounded-lg text-sm leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-[#FFA015] focus:border-[#FFA015]"
+              className="block bg-white py-3 pr-12 pl-4 border border-gray-300 focus:border-[#FFA015] rounded-lg focus:outline-none focus:ring-[#FFA015] focus:ring-2 w-full text-sm leading-5 placeholder-gray-500 focus:placeholder-gray-400"
             />
-            <div className="absolute inset-y-0 right-0 pr-4 flex items-center pointer-events-none">
+            <div className="right-0 absolute inset-y-0 flex items-center pr-4 pointer-events-none">
               <svg
-                className="h-5 w-5 text-gray-400"
+                className="w-5 h-5 text-gray-400"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -80,15 +80,15 @@ export function FaqPageClient({ initialFaqs }: FaqPageClientProps) {
               </svg>
             </div>
             {isSearching && (
-              <div className="absolute inset-y-0 right-0 pr-12 flex items-center">
-                <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-[#FFA015]"></div>
+              <div className="right-0 absolute inset-y-0 flex items-center pr-12">
+                <div className="border-[#FFA015] border-b-2 rounded-full w-4 h-4 animate-spin"></div>
               </div>
             )}
           </div>
         </div>
 
         {/* FAQ List Container */}
-        <div className="bg-white rounded-lg p-6 shadow-sm">
+        <div className="bg-white shadow-sm p-6 rounded-lg">
           <FaqSearchClient initialFaqs={filteredFaqs} />
         </div>
       </div>
