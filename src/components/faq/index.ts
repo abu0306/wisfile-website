@@ -1,3 +1,4 @@
-export { default as FaqCard } from './FaqCard';
-export { default as FaqSearchClient } from './FaqSearchClient';
-export { default as Pagination } from './Pagination';
+export * from "./FaqCard";
+export * from "./FaqSearchClient";
+export * from "./Pagination";
+export * from "./FaqPageClient";

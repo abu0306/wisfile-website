@@ -1,0 +1,93 @@
+{
+  "totalChunks": 12,
+  "totalItems": 2205,
+  "chunkSize": 200,
+  "chunks": [
+    {
+      "index": 1,
+      "filename": "faq-chunk-1.json",
+      "startIndex": 1,
+      "endIndex": 200,
+      "count": 200
+    },
+    {
+      "index": 2,
+      "filename": "faq-chunk-2.json",
+      "startIndex": 201,
+      "endIndex": 400,
+      "count": 200
+    },
+    {
+      "index": 3,
+      "filename": "faq-chunk-3.json",
+      "startIndex": 401,
+      "endIndex": 600,
+      "count": 200
+    },
+    {
+      "index": 4,
+      "filename": "faq-chunk-4.json",
+      "startIndex": 601,
+      "endIndex": 800,
+      "count": 200
+    },
+    {
+      "index": 5,
+      "filename": "faq-chunk-5.json",
+      "startIndex": 801,
+      "endIndex": 1000,
+      "count": 200
+    },
+    {
+      "index": 6,
+      "filename": "faq-chunk-6.json",
+      "startIndex": 1001,
+      "endIndex": 1200,
+      "count": 200
+    },
+    {
+      "index": 7,
+      "filename": "faq-chunk-7.json",
+      "startIndex": 1201,
+      "endIndex": 1400,
+      "count": 200
+    },
+    {
+      "index": 8,
+      "filename": "faq-chunk-8.json",
+      "startIndex": 1401,
+      "endIndex": 1600,
+      "count": 200
+    },
+    {
+      "index": 9,
+      "filename": "faq-chunk-9.json",
+      "startIndex": 1601,
+      "endIndex": 1800,
+      "count": 200
+    },
+    {
+      "index": 10,
+      "filename": "faq-chunk-10.json",
+      "startIndex": 1801,
+      "endIndex": 2000,
+      "count": 200
+    },
+    {
+      "index": 11,
+      "filename": "faq-chunk-11.json",
+      "startIndex": 2001,
+      "endIndex": 2200,
+      "count": 200
+    },
+    {
+      "index": 12,
+      "filename": "faq-chunk-12.json",
+      "startIndex": 2201,
+      "endIndex": 2205,
+      "count": 5
+    }
+  ],
+  "generatedAt": "2025-07-31T07:44:09.875Z",
+  "sourceFile": "WisFile_FAQ内容_数据表_表格.xlsx"
+}
