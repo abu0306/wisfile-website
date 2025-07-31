@@ -1,9 +1,14 @@
 import { notFound } from "next/navigation";
-import { getFaqBySlug, getAllFaqs } from "@/lib/faq-server";
+import {
+  getFaqBySlug,
+  getAllFaqs,
+  getArticleRecommendations,
+} from "@/lib/faq-server";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
 import RecommendBanner from "@/components/faq/RecommendBanner";
+import ArticleRecommendations from "@/components/faq/ArticleRecommendations";
 import { HomeOutlined } from "@ant-design/icons";
 
 interface FaqPageProps {
@@ -78,6 +83,9 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
   const prevFaq = currentIndex > 0 ? allFaqs[currentIndex - 1] : null;
   const nextFaq =
     currentIndex < allFaqs.length - 1 ? allFaqs[currentIndex + 1] : null;
+
+  // 获取推荐文章
+  const recommendations = getArticleRecommendations(faq.id);
 
   return (
     <article className="min-h-screen overflow-x-hidden bg-[#FEFCF7]">
@@ -203,12 +211,31 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
             </div>
           </div>
 
-          {/* Right Column - Recommend Banner */}
+          {/* Right Column - Series Recommendations */}
           <div className="w-full lg:w-[402px] flex-shrink-0 flex justify-center lg:justify-start">
-            <div className="lg:sticky lg:top-8">
+            <div className="lg:sticky lg:top-8 w-full space-y-6">
+              {/* 推荐系列文章 - 侧边栏样式 */}
+              <ArticleRecommendations
+                series={recommendations.series}
+                continueReading={[]}
+                variant="sidebar"
+              />
+
+              {/* 原有的推荐Banner */}
               <RecommendBanner />
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Continue Reading Section - Bottom */}
+      <div className="bg-[#FEFCF7] py-12">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <ArticleRecommendations
+            series={[]}
+            continueReading={recommendations.continueReading}
+            variant="bottom"
+          />
         </div>
       </div>
     </article>
