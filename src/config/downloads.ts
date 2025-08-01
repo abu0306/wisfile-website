@@ -10,8 +10,8 @@ export interface DownloadConfig {
 
 // 构建时生成的配置
 export const downloadConfig: DownloadConfig = {
-  "aarch64": "/downloads/WisFile_1.2.19_aarch64.dmg",
-  "x64": "/downloads/WisFile_1.2.19_x64.dmg",
-  "windows": "/downloads/WisFile_1.2.19_x64-setup.exe",
-  "version": "1.2.19"
+  "aarch64": "/downloads/WisFile_1.2.20_aarch64.dmg",
+  "x64": "/downloads/WisFile_1.2.20_x64.dmg",
+  "windows": "/downloads/WisFile_1.2.20_x64-setup.exe",
+  "version": "1.2.20"
 };
