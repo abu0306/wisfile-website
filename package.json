@@ -6,11 +6,13 @@
     "dev": "next dev",
     "build": "node scripts/generate-downloads.mjs && next build",
     "prebuild": "node scripts/generate-downloads.mjs",
+    "postbuild": "next-sitemap",
     "start": "next start",
     "lint": "next lint",
     "lint:fix": "next lint --fix",
     "process-excel": "node scripts/process-excel-to-chunks.js",
-    "verify-chunks": "node scripts/verify-chunks.js"
+    "verify-chunks": "node scripts/verify-chunks.js",
+    "generate-sitemap": "next-sitemap"
   },
   "dependencies": {
     "@ant-design/nextjs-registry": "^1.0.2",
