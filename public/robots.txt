@@ -7,4 +7,5 @@ Host: https://www.wisfile.ai
 
 # Sitemaps
 Sitemap: https://www.wisfile.ai/sitemap.xml
-Sitemap: https://www.wisfile.ai/faq-sitemap.xml
+Sitemap: https://www.wisfile.ai/sitemap-0.xml
+Sitemap: https://www.wisfile.ai/sitemap-1.xml

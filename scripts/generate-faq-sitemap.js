@@ -57,7 +57,7 @@ function generateFaqSitemap() {
 </urlset>`;
 
     // Write to public directory
-    const outputPath = path.join(__dirname, '../public/faq-sitemap.xml');
+    const outputPath = path.join(__dirname, '../public/sitemap-1.xml');
     fs.writeFileSync(outputPath, sitemap);
     
     console.log(`✅ FAQ sitemap generated successfully with ${faqSlugs.length + 1} URLs`);

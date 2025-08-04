@@ -4,7 +4,7 @@ module.exports = {
   generateRobotsTxt: true,
   generateIndexSitemap: true,
   outDir: 'public',
-  exclude: ['/api/*', '/faq/*', '/faq'],
+  exclude: ['/api/*', '/faq/*'],
   robotsTxtOptions: {
     policies: [
       {
@@ -13,8 +13,8 @@ module.exports = {
       },
     ],
     additionalSitemaps: [
-      'https://www.wisfile.ai/sitemap.xml',
-      'https://www.wisfile.ai/faq-sitemap.xml',
+      'https://www.wisfile.ai/sitemap-0.xml',
+      'https://www.wisfile.ai/sitemap-1.xml',
     ],
   },
   changefreq: 'daily',
