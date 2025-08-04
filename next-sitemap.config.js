@@ -2,9 +2,9 @@
 module.exports = {
   siteUrl: 'https://www.wisfile.ai',
   generateRobotsTxt: true,
-  generateIndexSitemap: false,
+  generateIndexSitemap: true,
   outDir: 'public',
-  exclude: ['/api/*'],
+  exclude: ['/api/*', '/faq/*', '/faq'],
   robotsTxtOptions: {
     policies: [
       {
@@ -14,6 +14,7 @@ module.exports = {
     ],
     additionalSitemaps: [
       'https://www.wisfile.ai/sitemap.xml',
+      'https://www.wisfile.ai/faq-sitemap.xml',
     ],
   },
   changefreq: 'daily',
@@ -46,12 +47,6 @@ module.exports = {
     if (path.startsWith('/blog/')) {
       priority = 0.6;
       changefreq = 'monthly';
-    }
-    
-    // FAQ pages get medium priority
-    if (path.startsWith('/faq/')) {
-      priority = 0.6;
-      changefreq = 'weekly';
     }
     
     // Legal pages get lower priority
