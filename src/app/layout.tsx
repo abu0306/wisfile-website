@@ -10,6 +10,7 @@ import StoreProvider from "./StoreProvider";
 import "@/styles/index.scss";
 import "aos/dist/aos.css";
 import LazyImage from "@/components/LazyImage";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -79,6 +80,7 @@ export default function RootLayout({
             />
           </a>
           {children}
+          <SpeedInsights />
           <Footer />
           {process.env.NODE_ENV === "development" && <StagewiseToolbar />}
           {process.env.NODE_ENV === "production" && (

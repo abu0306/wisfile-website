@@ -21,6 +21,7 @@
     "@reduxjs/toolkit": "^2.8.2",
     "@stagewise/toolbar-next": "^0.1.2",
     "@svgr/webpack": "^8.1.0",
+    "@vercel/speed-insights": "^1.2.0",
     "antd": "^5.26.1",
     "aos": "^2.3.4",
     "axios": "^1.10.0",
