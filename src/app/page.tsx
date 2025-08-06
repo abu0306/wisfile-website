@@ -45,7 +45,7 @@ export default function Home() {
         {/* Right: Hero Image */}
         <div className="flex flex-1 justify-center items-center w-full max-w-xl">
           <LazyImage
-            src="/images/hero.png"
+            src="/images/webp/hero-1200w.webp"
             alt="AI Renaming Hero Screenshot"
             width={1190}
             height={612}
