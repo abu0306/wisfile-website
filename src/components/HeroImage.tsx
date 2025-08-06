@@ -1,5 +1,6 @@
 import React from "react";
 import Image from "next/image";
+import { isMobileServer } from "@/lib/device-detection";
 
 interface HeroImageProps {
   className?: string;
@@ -9,6 +10,9 @@ const HeroImage: React.FC<HeroImageProps> = ({ className = "" }) => {
   const lightGrayBlurDataURL = `data:image/svg+xml;base64,${btoa(
     `<svg width="1190" height="612" xmlns="http://www.w3.org/2000/svg"><rect width="100%" height="100%" fill="#f0f0f0"/></svg>`
   )}`;
+
+  // 服务端检测是否为移动端
+  const isMobile = isMobileServer();
 
   return (
     <div
@@ -23,7 +27,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ className = "" }) => {
         } as React.CSSProperties
       }
     >
-      <Image
+     {!isMobile && ( <Image
         src={"/images/webp/hero-1024w.webp"}
         alt="AI Renaming Hero Screenshot"
         width={1190}
@@ -36,9 +40,9 @@ const HeroImage: React.FC<HeroImageProps> = ({ className = "" }) => {
         className="hidden md:block bg-transparent w-full h-auto object-contain text-transparent"
         fetchPriority="high"
         decoding="async"
-      />
+      />)}
 
-      <Image
+      {isMobile && ( <Image
         src={"/images/webp/hero-480w.webp"}
         alt="AI Renaming Hero Screenshot"
         width={1190}
@@ -51,7 +55,7 @@ const HeroImage: React.FC<HeroImageProps> = ({ className = "" }) => {
         className="md:hidden block bg-transparent w-full h-auto object-contain text-transparent"
         fetchPriority="high"
         decoding="async"
-      />
+      />)}
     </div>
   );
 };
