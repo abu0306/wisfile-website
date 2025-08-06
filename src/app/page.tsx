@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <main className="flex flex-col bg-[#FEFCF7] px-4 min-h-screen">
       {/* Hero Section - 完全静态 */}
-      <section className="flex md:flex-row flex-col justify-center items-center gap-8 pt-[120px] md:pt-[180px] w-full max-w-7xl mx-auto">
+      <section className="flex md:flex-row flex-col justify-center items-center gap-8 mx-auto pt-[120px] md:pt-[180px] w-full max-w-7xl">
         {/* Left: Title, Subtitle, Buttons */}
         <div className="flex flex-col flex-1 justify-center items-start w-full max-w-2xl">
           {/* Hero Title */}
@@ -29,14 +29,14 @@ export default function Home() {
           {/* Subtitle */}
           <div className="flex md:flex-row flex-col items-start md:items-center gap-2 md:gap-6 mb-6 md:mb-10 text-gray-700 text-sm md:text-xl text-left">
             <span>
-              100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks.
+              100% Local AI File Renamer and Organizer — No Fees, No Data Leaks.
             </span>
           </div>
           {/* Buttons */}
           <div className="flex flex-row md:flex-row items-start md:items-center gap-4 mb-6 md:mb-16 w-full max-w-5xl">
             <DownloadSection />
             <Link href={"features/ai-renamer"}>
-              <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full font-semibold text-gray-900 text-sm md:text-lg transition w-[199px] h-[62px]">
+              <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full w-[199px] h-[62px] font-semibold text-gray-900 text-sm md:text-lg transition">
                 Online Demo
               </button>
             </Link>
@@ -62,7 +62,7 @@ export default function Home() {
       <FeedbackSection />
 
       {/* FAQ Section - 完全静态 */}
-      <section className="flex flex-col items-center mt-9 md:mt-24 mb-16 md:mb-24 w-full max-w-7xl mx-auto">
+      <section className="flex flex-col items-center mx-auto mt-9 md:mt-24 mb-16 md:mb-24 w-full max-w-7xl">
         {/* Section Title */}
         <h2 className="mb-5 md:mb-12 px-4 font-bold text-[28px] md:text-[44px] text-center">
           Frequently Asked Questions
@@ -130,7 +130,7 @@ export default function Home() {
         <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 mb-4 md:mb-16 w-full">
           <DownloadSection />
           <Link href={"features/ai-renamer"}>
-            <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full font-semibold text-gray-900 text-sm md:text-lg transition w-[199px] h-[62px]">
+            <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full w-[199px] h-[62px] font-semibold text-gray-900 text-sm md:text-lg transition">
               Online Demo
             </button>
           </Link>

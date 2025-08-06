@@ -7,7 +7,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Blog | WisFile: Tidy Your Files with AI",
   description:
-    "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+    "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
     "Automatically generates clear, consistent filenames based on content. " +
     "Instantly sorts your files into logical folders for easy access. " +
     "All operations run on your device — no cloud, no data leaks.",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Blog | WisFile: Tidy Your Files with AI",
     description:
-      "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+      "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
     url: "https://www.wisfile.ai/blog",
     siteName: "WisFile",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     site: "@Wisfileofficial",
     title: "Blog | WisFile: Tidy Your Files with AI",
     description:
-      "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+      "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
   },
 };
@@ -40,9 +40,9 @@ export default async function BlogPage() {
   const recordMap = await notion.getPage(pageId);
 
   return (
-    <div className="container-custom py-12">
+    <div className="py-12 container-custom">
       {/* Add your blog content rendering logic here */}
-      <div className="prose max-w-none">
+      <div className="max-w-none prose">
         <NotionPage recordMap={recordMap} rootPageId={rootNotionPageId} />
       </div>
     </div>
