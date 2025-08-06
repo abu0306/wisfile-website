@@ -59,7 +59,6 @@ export default function RootLayout({
     <StoreProvider>
       <html lang="en">
         <head>
-          {/* Preload critical resources */}
           <link
             rel="preload"
             as="image"
@@ -68,10 +67,15 @@ export default function RootLayout({
           />
           <link
             rel="preload"
-            as="font"
-            href="/fonts/GeistVF.woff"
-            type="font/woff"
-            crossOrigin="anonymous"
+            as="image"
+            href="/images/webp/hero-480w.webp"
+            type="image/webp"
+          />
+          <link
+            rel="preload"
+            as="image"
+            href="/images/webp/ai-rename-1024w.webp"
+            type="image/webp"
           />
         </head>
         <body

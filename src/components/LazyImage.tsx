@@ -93,8 +93,17 @@ const LazyImage: React.FC<LazyImageProps> = ({
   return (
     <div
       ref={imgRef}
-      className={`relative overflow-hidden ${className}`}
-      style={style}
+      className={`relative ${className}`}
+      style={
+        {
+          backgroundColor: "#f9fafb",
+          borderRadius: "8px",
+          overflow: "hidden",
+          minHeight: fill ? "200px" : `${height}px`,
+          "--image-bg": "#f9fafb",
+          ...style,
+        } as React.CSSProperties
+      }
     >
       {/* 加载状态的占位符 */}
       {!isLoaded && !hasError && (
@@ -133,7 +142,7 @@ const LazyImage: React.FC<LazyImageProps> = ({
         </div>
       )}
 
-      {/* 实际的图片 */}
+      {/* 实际的图片 - 参考 HeroImage.tsx 的属性 */}
       {isInView && !hasError && (
         <Image
           src={src}
@@ -149,9 +158,11 @@ const LazyImage: React.FC<LazyImageProps> = ({
           loading={priority ? undefined : loading}
           onLoad={handleLoad}
           onError={handleError}
-          className={`transition-opacity duration-300 ${
+          className={`transition-opacity duration-300 bg-transparent w-full h-auto object-contain text-transparent ${
             isLoaded ? "opacity-100" : "opacity-0"
           }`}
+          fetchPriority={priority ? "high" : "auto"}
+          decoding="async"
         />
       )}
     </div>
