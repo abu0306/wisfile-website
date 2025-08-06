@@ -17,7 +17,7 @@ export function ScenarioSection() {
       title: "Messy File Names? AI-Powered Renaming in One Click!",
       description:
         'Downloaded tons of papers, only to find filenames like "Ogvh2345.pdf" or "749sci-ab96.pdf"? Our AI automatically extracts key information such as the title, authors, and publication year, and renames your files based on content and context in one click! Restore the original paper titles effortlessly — no more guessing or digging through folders to find what you need!',
-      image: "/images/ai-rename.png",
+      image: "/images/webp/ai-rename-1024w.webp",
       alt: "AI Renaming Scenario 1",
     },
     {
@@ -25,7 +25,7 @@ export function ScenarioSection() {
       title: "Struggling to Standardize File-Names? Custom Formatting in 1s!",
       description:
         "Tired of papers named in all sorts of ways from different sources, making organization a nightmare? With support for custom naming templates (e.g., Author-Year-Title), our AI renames your files in bulk—uniform, clean, and well-structured in seconds. Perfect for easy citation, management, and archiving.",
-      image: "/images/rename-slots.png",
+      image: "/images/webp/rename-slots-1024w.webp",
       alt: "Standardize Filenames Scenario",
     },
     {
@@ -33,7 +33,7 @@ export function ScenarioSection() {
       title: "Papers Scattered Everywhere? AI Sorting + Renaming in One Step!",
       description:
         "Downloaded papers are scattered across multiple folders, and manually organizing them feels like a chore? Let AI take over—automatically detect subject areas, fields, or journal names, then batch classify and rename your files. Papers of the same type are neatly grouped into unified folders, turning chaos into order—clean, structured, and done in one go.",
-      image: "/images/auto-foldering.png",
+      image: "/images/webp/auto-foldering-1024w.webp",
       alt: "Papers Scattered Scenario",
     },
   ];
