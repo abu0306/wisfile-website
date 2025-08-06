@@ -39,7 +39,7 @@ export default function Home() {
             <div className="flex flex-row md:flex-row items-start md:items-center gap-4 mb-6 md:mb-16 w-full max-w-5xl">
               <DownloadSection />
               <Link href={"features/ai-renamer"}>
-                <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full w-[199px] h-[62px] font-semibold text-gray-900 text-sm md:text-lg transition">
+                <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full w-[150px] md:w-[199px] h-[40px] md:h-[62px] font-semibold text-gray-900 text-sm md:text-lg transition">
                   Online Demo
                 </button>
               </Link>
@@ -126,7 +126,7 @@ export default function Home() {
           <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 mb-4 md:mb-16 w-full">
             <DownloadSection />
             <Link href={"features/ai-renamer"}>
-              <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full w-[199px] h-[62px] font-semibold text-gray-900 text-sm md:text-lg transition">
+              <button className="bg-transparent hover:bg-gray-100 border-2 border-gray-400 rounded-full w-[150px] md:w-[199px] h-[40px] md:h-[62px] font-semibold text-gray-900 text-sm md:text-lg transition">
                 Online Demo
               </button>
             </Link>
