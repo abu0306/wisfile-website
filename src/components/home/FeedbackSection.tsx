@@ -115,7 +115,7 @@ export function FeedbackSection() {
             aria-label="Previous"
           >
             <LazyImage
-              src="/images/left-arrow.png"
+              src="/images/webp/left-arrow-1024w.webp"
               alt="Previous"
               width={48}
               height={48}
@@ -156,7 +156,7 @@ export function FeedbackSection() {
             aria-label="Next"
           >
             <LazyImage
-              src="/images/right-arrow.png"
+              src="/images/webp/right-arrow-1024w.webp"
               alt="Next"
               width={48}
               height={48}
