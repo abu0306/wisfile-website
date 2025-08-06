@@ -192,7 +192,7 @@ export default function AiRenamePage() {
           Tidy Your Files with <span className="text-[#FFA800]">AI</span>
         </h1>
         <p className="mb-6 px-4 md:px-0 text-gray-600 text-sm md:text-base text-center">
-          100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks.
+          100% Local AI File Renamer and Organizer — No Fees, No Data Leaks.
         </p>
         <div className="flex flex-row md:flex-row justify-center items-center gap-4 mt-8 md:mt-12 md:mb-16 px-2 md:px-0 max-w-5xl">
           <Link href="/downloads">

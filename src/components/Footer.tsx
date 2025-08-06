@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="flex flex-col items-start md:items-start mb-12 md:mb-0 w-full md:w-auto">
           <div className="flex items-center mb-6 md:mb-2">
             <LazyImage
-              src="/images/logo.png"
+              src="/images/webp/logo-1024w.webp"
               alt="WisFile Logo"
               width={52}
               height={52}
@@ -94,7 +94,7 @@ export default function Footer() {
               className="flex justify-center items-center bg-[#FFF6E0] hover:bg-[#FFD36A] shadow-lg hover:shadow-xl p-4 md:p-4 rounded-2xl hover:scale-105 transition-all duration-300 transform"
             >
               <LazyImage
-                src="/images/x-logo.png"
+                src="/images/webp/x-logo-1024w.webp"
                 alt="X"
                 width={36}
                 height={36}
@@ -109,7 +109,7 @@ export default function Footer() {
               className="flex justify-center items-center bg-[#FFF6E0] hover:bg-[#FFD36A] shadow-lg hover:shadow-xl p-4 md:p-4 rounded-2xl hover:scale-105 transition-all duration-300 transform"
             >
               <LazyImage
-                src="/images/discord-logo.png"
+                src="/images/webp/discord-logo-1024w.webp"
                 alt="Discord"
                 width={36}
                 height={36}

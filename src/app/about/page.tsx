@@ -4,7 +4,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = {
   title: "About Us | WisFile: Tidy Your Files with AI",
   description:
-    "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+    "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
     "Automatically generates clear, consistent filenames based on content. " +
     "Instantly sorts your files into logical folders for easy access. " +
     "All operations run on your device — no cloud, no data leaks.",
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "About Us | WisFile: Tidy Your Files with AI",
     description:
-      "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+      "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
     url: "https://www.wisfile.ai/about",
     siteName: "WisFile",
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
     site: "@Wisfileofficial",
     title: "About Us | WisFile: Tidy Your Files with AI",
     description:
-      "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+      "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
   },
 };
@@ -43,7 +43,7 @@ export default function AboutPage() {
         />
       </div>
       <div className="flex flex-col items-start bg-transparent px-4 sm:px-0 w-full max-w-4xl">
-        <h1 className="mb-4 sm:mb-6 md:font-bold text-2xl sm:text-3xl md:text-5xl leading-tight text-center w-full">
+        <h1 className="mb-4 sm:mb-6 w-full md:font-bold text-2xl sm:text-3xl md:text-5xl text-center leading-tight">
           About Us
         </h1>
         <p className="mb-3 sm:mb-4 text-sm sm:text-base md:text-lg leading-relaxed">

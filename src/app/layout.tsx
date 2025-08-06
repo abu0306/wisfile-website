@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { StagewiseToolbar } from "@stagewise/toolbar-next";
 import { Nav } from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { QueryParamsHandler } from "@/components/QueryParamsHandler";
@@ -26,7 +25,7 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "WisFile: Tidy Your Files with AI",
   description:
-    "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+    "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
     "Automatically generates clear, consistent filenames based on content. " +
     "Instantly sorts your files into logical folders for easy access. " +
     "All operations run on your device — no cloud, no data leaks.",
@@ -36,7 +35,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "WisFile: Tidy Your Files with AI",
     description:
-      "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+      "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
     url: "https://www.wisfile.ai",
     siteName: "WisFile",
@@ -47,7 +46,7 @@ export const metadata: Metadata = {
     site: "@Wisfileofficial",
     title: "WisFile: Tidy Your Files with AI",
     description:
-      "100% Local AI File Renamer and Orgnizer — No Fees, No Data Leaks. " +
+      "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
   },
 };
@@ -60,6 +59,26 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
+        <head>
+          <link
+            rel="preload"
+            as="image"
+            href="/images/webp/hero-1200w.webp"
+            type="image/webp"
+          />
+          <link
+            rel="preload"
+            as="image"
+            href="/images/webp/hero-480w.webp"
+            type="image/webp"
+          />
+          <link
+            rel="preload"
+            as="image"
+            href="/images/webp/ai-rename-1024w.webp"
+            type="image/webp"
+          />
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FEFCF7]`}
         >
@@ -82,7 +101,6 @@ export default function RootLayout({
           {children}
           <SpeedInsights />
           <Footer />
-          {process.env.NODE_ENV === "development" && <StagewiseToolbar />}
           {process.env.NODE_ENV === "production" && (
             <>
               <Script

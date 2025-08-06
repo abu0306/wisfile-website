@@ -79,7 +79,7 @@ export function Nav() {
             {/* Logo */}
             <Link href="/" className="flex items-center space-x-2">
               <LazyImage
-                src="/images/logo.png"
+                src="/images/webp/logo-1024w.webp"
                 alt="WisFile Logo"
                 width={32}
                 height={32}

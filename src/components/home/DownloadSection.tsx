@@ -12,7 +12,7 @@ export function DownloadSection() {
         </button>
       </Link>
       <Link href="/downloads">
-        <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md rounded-full text-gray-900 text-sm md:text-lg transition w-[199px] h-[62px]">
+        <button className="md:hidden block bg-[#FFD36A] hover:bg-[#FFCB3C] shadow-md rounded-full text-gray-900 text-sm md:text-lg transition w-[150px]  md:w-[199px] h-[40px] md:h-[62px]">
           Download
         </button>
       </Link>
