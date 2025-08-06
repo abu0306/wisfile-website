@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
-import { StagewiseToolbar } from "@stagewise/toolbar-next";
 import { Nav } from "@/components/Nav";
 import Footer from "@/components/Footer";
 import { QueryParamsHandler } from "@/components/QueryParamsHandler";
@@ -80,7 +79,6 @@ export default function RootLayout({
           </a>
           {children}
           <Footer />
-          {process.env.NODE_ENV === "development" && <StagewiseToolbar />}
           {process.env.NODE_ENV === "production" && (
             <>
               <Script
