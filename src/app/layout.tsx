@@ -58,6 +58,22 @@ export default function RootLayout({
   return (
     <StoreProvider>
       <html lang="en">
+        <head>
+          {/* Preload critical resources */}
+          <link
+            rel="preload"
+            as="image"
+            href="/images/webp/hero-1200w.webp"
+            type="image/webp"
+          />
+          <link
+            rel="preload"
+            as="font"
+            href="/fonts/GeistVF.woff"
+            type="font/woff"
+            crossOrigin="anonymous"
+          />
+        </head>
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased bg-[#FEFCF7]`}
         >
