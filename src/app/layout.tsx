@@ -90,7 +90,7 @@ export default function RootLayout({
             className="top-14 md:top-[10px] right-6 md:right-8 z-50 fixed"
           >
             <LazyImage
-              src="/images/product_review.svg"
+              src="/images/webp/product_review.webp"
               alt="WisFile - 100% Local & Free AI File Manager for Docx and PDFs | Product Hunt"
               width={250}
               height={54}
