@@ -96,11 +96,8 @@ const LazyImage: React.FC<LazyImageProps> = ({
       className={`relative ${className}`}
       style={
         {
-          backgroundColor: "#f9fafb",
           borderRadius: "8px",
           overflow: "hidden",
-          minHeight: fill ? "200px" : `${height}px`,
-          "--image-bg": "#f9fafb",
           ...style,
         } as React.CSSProperties
       }

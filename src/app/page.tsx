@@ -15,9 +15,9 @@ export default function Home() {
           <div className="flex flex-col flex-1 justify-center items-start w-full max-w-2xl">
             {/* Hero Title */}
             <div className="relative w-full">
-              <h1 className="font-bold text-[26px] md:text-[56px] text-left leading-tight">
-                Tidy Your Files with AI
-              </h1>
+              <div className="font-bold text-[20px] md:text-[46px] text-left leading-tight">
+                AI-Powered File Renaming & <br /> Organizing Tool
+              </div>
               <div className="hidden md:block top-0 right-0 absolute w-fit -translate-y-[10px] translate-x-[-65px]">
                 <LazyImage
                   src="/images/star.png"
@@ -32,7 +32,8 @@ export default function Home() {
             {/* Subtitle */}
             <div className="flex md:flex-row flex-col items-start md:items-center gap-2 md:gap-6 mb-6 md:mb-10 text-gray-700 text-sm md:text-xl text-left">
               <span>
-                100% Local AI File Renamer and Organizer — No Fees, No Data Leaks.
+                100% Local AI File Renamer and Organizer — No Fees, No Data
+                Leaks.
               </span>
             </div>
             {/* Buttons */}
@@ -108,7 +109,8 @@ export default function Home() {
                 </span>
               </div>
               <div className="ml-4 md:ml-6 text-gray-700 text-sm md:text-base">
-                You can send your advice or your questions to our support e-mail:{" "}
+                You can send your advice or your questions to our support
+                e-mail:{" "}
                 <span className="text-[#FFA800]">support@atominfinite.ai</span>
               </div>
             </div>

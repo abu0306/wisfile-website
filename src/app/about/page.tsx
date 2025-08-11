@@ -2,7 +2,7 @@ import LazyImage from "@/components/LazyImage";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "About Us | WisFile: Tidy Your Files with AI",
+  title: "About Us | Wisfile: AI-Powered File Renaming & Organizing Tool",
   description:
     "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
     "Automatically generates clear, consistent filenames based on content. " +
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     canonical: "https://www.wisfile.ai/about",
   },
   openGraph: {
-    title: "About Us | WisFile: Tidy Your Files with AI",
+    title: "About Us | Wisfile: AI-Powered File Renaming & Organizing Tool",
     description:
       "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@Wisfileofficial",
-    title: "About Us | WisFile: Tidy Your Files with AI",
+    title: "About Us | Wisfile: AI-Powered File Renaming & Organizing Tool",
     description:
       "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
