@@ -18,7 +18,7 @@ export default function Home() {
               <div className="font-bold text-[20px] md:text-[46px] text-left leading-tight">
                 AI-Powered File Renaming & <br /> Organizing Tool
               </div>
-              <div className="hidden md:block top-0 right-0 absolute w-fit -translate-y-[10px] translate-x-[-65px]">
+              <div className="hidden md:block top-0 left-20 absolute w-fit -translate-y-[10px] translate-x-[-65px]">
                 <LazyImage
                   src="/images/star.png"
                   alt="star"
