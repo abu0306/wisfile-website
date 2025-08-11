@@ -23,7 +23,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "WisFile: Tidy Your Files with AI",
+  title: "Wisfile: AI-Powered File Renaming & Organizing Tool",
   description:
     "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
     "Automatically generates clear, consistent filenames based on content. " +
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
     canonical: "https://www.wisfile.ai",
   },
   openGraph: {
-    title: "WisFile: Tidy Your Files with AI",
+    title: "Wisfile: AI-Powered File Renaming & Organizing Tool",
     description:
       "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
@@ -44,7 +44,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@Wisfileofficial",
-    title: "WisFile: Tidy Your Files with AI",
+    title: "Wisfile: AI-Powered File Renaming & Organizing Tool",
     description:
       "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
@@ -91,7 +91,7 @@ export default function RootLayout({
             className="top-14 md:top-[10px] right-6 md:right-8 z-50 fixed"
           >
             <LazyImage
-              src="/images/product_review.svg"
+              src="/images/webp/product_review.webp"
               alt="WisFile - 100% Local & Free AI File Manager for Docx and PDFs | Product Hunt"
               width={250}
               height={54}

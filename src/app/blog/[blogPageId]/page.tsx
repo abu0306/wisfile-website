@@ -29,7 +29,7 @@ export async function generateMetadata({
     const title = pageBlock?.properties?.title?.[0]?.[0] || "Blog Post";
 
     return {
-      title: `${title} | WisFile: Tidy Your Files with AI`,
+      title: `${title} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
       description:
         "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
         "Automatically generates clear, consistent filenames based on content. " +
@@ -39,7 +39,7 @@ export async function generateMetadata({
         canonical: `https://www.wisfile.ai/blog/${params.blogPageId}`,
       },
       openGraph: {
-        title: `${title} | WisFile: Tidy Your Files with AI`,
+        title: `${title} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
         description:
           "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
           "Automatically generates clear, consistent filenames based on content.",
@@ -50,7 +50,7 @@ export async function generateMetadata({
       twitter: {
         card: "summary_large_image",
         site: "@Wisfileofficial",
-        title: `${title} | WisFile: Tidy Your Files with AI`,
+        title: `${title} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
         description:
           "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
           "Automatically generates clear, consistent filenames based on content.",
@@ -59,7 +59,7 @@ export async function generateMetadata({
   } catch (error) {
     console.error(`Error generating metadata for page ${pageId}:`, error);
     return {
-      title: "Blog Post | WisFile: Tidy Your Files with AI",
+      title: "Blog Post | Wisfile: AI-Powered File Renaming & Organizing Tool",
       description:
         "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
         "Automatically generates clear, consistent filenames based on content. " +

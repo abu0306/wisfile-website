@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service | WisFile: Tidy Your Files with AI",
+  title:
+    "Terms of Service | Wisfile: AI-Powered File Renaming & Organizing Tool",
   description:
     "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
     "Automatically generates clear, consistent filenames based on content. " +
@@ -11,7 +12,8 @@ export const metadata: Metadata = {
     canonical: "https://www.wisfile.ai/terms-of-service",
   },
   openGraph: {
-    title: "Terms of Service | WisFile: Tidy Your Files with AI",
+    title:
+      "Terms of Service | Wisfile: AI-Powered File Renaming & Organizing Tool",
     description:
       "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",
@@ -22,7 +24,8 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     site: "@Wisfileofficial",
-    title: "Terms of Service | WisFile: Tidy Your Files with AI",
+    title:
+      "Terms of Service | Wisfile: AI-Powered File Renaming & Organizing Tool",
     description:
       "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
       "Automatically generates clear, consistent filenames based on content.",

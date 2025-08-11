@@ -101,7 +101,7 @@ export function FeedbackSection() {
   return (
     <>
       {/* Desktop Version */}
-      <section className="hidden md:flex flex-col items-center mt-16 md:mt-24 w-full max-w-7xl mx-auto">
+      <section className="hidden md:flex flex-col items-center mx-auto mt-16 md:mt-24 w-full max-w-7xl">
         {/* Section Title */}
         <h2 className="mb-8 md:mb-12 px-4 font-bold text-[26px] md:text-[44px] text-center">
           Check Feedback from Our Users

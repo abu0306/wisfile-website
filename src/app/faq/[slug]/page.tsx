@@ -40,7 +40,7 @@ export async function generateMetadata({
   }
 
   return {
-    title: `${faq.question} | WisFile: Tidy Your Files with AI`,
+    title: `${faq.question} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
     description: faq.description,
     keywords:
       faq.keywords.join(",") +
@@ -56,14 +56,14 @@ export async function generateMetadata({
       type: "article",
       locale: "en_US",
       url: `https://www.wisfile.ai/faq/${slug}`,
-      title: `${faq.question} | WisFile: Tidy Your Files with AI`,
+      title: `${faq.question} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
       description: faq.description,
       siteName: "WisFile",
     },
     twitter: {
       card: "summary_large_image",
       site: "@Wisfileofficial",
-      title: `${faq.question} | WisFile: Tidy Your Files with AI`,
+      title: `${faq.question} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
       description: faq.description,
     },
   };
@@ -88,10 +88,10 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
   const recommendations = getArticleRecommendations(faq.id);
 
   return (
-    <article className="min-h-screen overflow-x-hidden bg-[#FEFCF7]">
+    <article className="bg-[#FEFCF7] min-h-screen overflow-x-hidden">
       {/* Header Image */}
       {faq.headerImageUrl && (
-        <div className="w-full h-[257px] relative overflow-hidden mt-[125px]">
+        <div className="relative mt-[125px] w-full h-[257px] overflow-hidden">
           <Image
             src={faq.headerImageUrl}
             alt={faq.question}
@@ -109,22 +109,19 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
       >
         {/* Article Title - Full Width */}
         <div className="mb-8">
-          <div className="prose prose-lg max-w-none">
+          <div className="max-w-none prose prose-lg">
             <div
-              className="text-gray-800 leading-relaxed
-                [&>h1]:w-screen [&>h1]:relative [&>h1]:left-1/2 [&>h1]:-translate-x-1/2 [&>h1]:bg-white [&>h1]:h-[171px] [&>h1]:flex [&>h1]:flex-col [&>h1]:justify-center [&>h1]:text-3xl [&>h1]:font-bold [&>h1]:text-gray-900 [&>h1]:mb-8
-                [&>h1]:pl-[max(1rem,calc((100vw-1280px)/2+1rem))] [&>h1]:sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] [&>h1]:lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]
-                [&>*:not(h1)]:hidden"
+              className="[&>*:not(h1)]:hidden [&>h1]:left-1/2 [&>h1]:relative [&>h1]:flex [&>h1]:flex-col [&>h1]:justify-center [&>h1]:bg-white [&>h1]:mb-8 [&>h1]:pl-[max(1rem,calc((100vw-1280px)/2+1rem))] [&>h1]:sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] [&>h1]:lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] [&>h1]:w-screen [&>h1]:h-[171px] [&>h1]:font-bold text-gray-800 [&>h1]:text-gray-900 [&>h1]:text-3xl leading-relaxed [&>h1]:-translate-x-1/2"
               dangerouslySetInnerHTML={{ __html: faq.content }}
             />
             {/* Breadcrumb Navigation - positioned over the h1 */}
-            <div className="w-screen relative left-1/2 -translate-x-1/2 bg-white h-[171px] flex flex-col justify-center -mt-[171px] mb-8 pl-[max(1rem,calc((100vw-1280px)/2+1rem))] sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))]">
+            <div className="left-1/2 relative flex flex-col justify-center bg-white -mt-[171px] mb-8 pl-[max(1rem,calc((100vw-1280px)/2+1rem))] sm:pl-[max(1.5rem,calc((100vw-1280px)/2+1.5rem))] lg:pl-[max(2rem,calc((100vw-1280px)/2+2rem))] w-screen h-[171px] -translate-x-1/2">
               {/* Breadcrumb */}
               <nav className="mb-4" aria-label="Breadcrumb">
-                <div className="flex items-center text-sm text-gray-600">
+                <div className="flex items-center text-gray-600 text-sm">
                   <Link
                     href="/"
-                    className="hover:text-gray-900 transition-colors inline-flex items-center"
+                    className="inline-flex items-center hover:text-gray-900 transition-colors"
                     style={{ paddingBottom: "2px" }}
                   >
                     <HomeOutlined
@@ -140,13 +137,13 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
                     FAQ
                   </Link>
                   <span className="mx-2">/</span>
-                  <span className="text-gray-900 font-medium truncate max-w-[200px] sm:max-w-[300px] lg:max-w-[400px]">
+                  <span className="max-w-[200px] sm:max-w-[300px] lg:max-w-[400px] font-medium text-gray-900 truncate">
                     {faq.question}
                   </span>
                 </div>
               </nav>
               {/* Title */}
-              <h1 className="text-3xl font-bold text-gray-900">
+              <h1 className="font-bold text-gray-900 text-3xl">
                 {faq.question}
               </h1>
             </div>
@@ -154,40 +151,29 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
         </div>
 
         {/* Main Content Area - Two Column Layout */}
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex lg:flex-row flex-col gap-8">
           {/* Left Column - Article Content */}
           <div className="flex-1 lg:max-w-[calc(100%-450px)]">
-            <div className="prose prose-lg max-w-none">
+            <div className="max-w-none prose prose-lg">
               <div
-                className="text-gray-800 leading-relaxed
-                  [&>h1]:hidden
-                  [&>p]:mb-6 [&>p]:text-base [&>p]:leading-7
-                  [&>h2]:text-2xl [&>h2]:font-bold [&>h2]:text-gray-900 [&>h2]:mt-8 [&>h2]:mb-4
-                  [&>h3]:text-lg [&>h3]:font-semibold [&>h3]:text-gray-900 [&>h3]:mt-5 [&>h3]:mb-2
-                  [&>ul]:mb-6 [&>ol]:mb-6 [&>li]:mb-2
-                  [&>a]:text-blue-600 [&>a]:hover:text-blue-700
-                  [&>blockquote]:border-l-4 [&>blockquote]:border-gray-300 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-gray-600
-                  [&>code]:bg-gray-100 [&>code]:px-1 [&>code]:py-0.5 [&>code]:rounded [&>code]:text-red-600
-                  [&>pre]:bg-gray-100 [&>pre]:p-4 [&>pre]:rounded [&>pre]:overflow-x-auto
-                  [&>img]:w-[70%] [&>img]:h-auto [&>img]:my-6 [&>img]:mx-auto [&>img]:rounded-lg [&>img]:shadow-md [&>img]:block
-                  [&_strong]:font-bold [&_strong]:text-gray-900"
+                className="[&>h1]:hidden [&>img]:block [&>code]:bg-gray-100 [&>pre]:bg-gray-100 [&>img]:shadow-md [&>img]:mx-auto [&>img]:my-6 [&>h2]:mt-8 [&>h3]:mt-5 [&>h2]:mb-4 [&>h3]:mb-2 [&>li]:mb-2 [&>ol]:mb-6 [&>p]:mb-6 [&>ul]:mb-6 [&>pre]:p-4 [&>code]:px-1 [&>code]:py-0.5 [&>blockquote]:pl-4 [&>blockquote]:border-gray-300 [&>blockquote]:border-l-4 [&>code]:rounded [&>pre]:rounded [&>img]:rounded-lg [&>img]:w-[70%] [&>img]:h-auto [&>pre]:overflow-x-auto [&>h3]:font-semibold [&_strong]:font-bold [&>h2]:font-bold text-gray-800 [&_strong]:text-gray-900 [&>a]:hover:text-blue-700 [&>a]:text-blue-600 [&>blockquote]:text-gray-600 [&>code]:text-red-600 [&>h2]:text-gray-900 [&>h3]:text-gray-900 [&>p]:text-base [&>h3]:text-lg [&>h2]:text-2xl [&>blockquote]:italic leading-relaxed [&>p]:leading-7"
                 dangerouslySetInnerHTML={{ __html: faq.content }}
               />
             </div>
 
             {/* Navigation - Article Content Area */}
             <div className="mt-12 pt-8">
-              <div className="flex items-center justify-center gap-8">
+              <div className="flex justify-center items-center gap-8">
                 {prevFaq ? (
                   <Link
                     href={`/faq/${prevFaq.slug}`}
-                    className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
+                    className="flex justify-center items-center gap-2 border border-gray-300 rounded-md w-[187px] h-[31px] text-gray-600 hover:text-gray-900 transition-colors"
                   >
                     <span>&lt;</span>
                     <span>Previous</span>
                   </Link>
                 ) : (
-                  <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
+                  <span className="flex justify-center items-center gap-2 border border-gray-300 rounded-md w-[187px] h-[31px] text-gray-400 cursor-not-allowed">
                     <span>&lt;</span>
                     <span>Previous</span>
                   </span>
@@ -196,13 +182,13 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
                 {nextFaq ? (
                   <Link
                     href={`/faq/${nextFaq.slug}`}
-                    className="flex items-center justify-center gap-2 text-gray-600 hover:text-gray-900 transition-colors border border-gray-300 rounded-md w-[187px] h-[31px]"
+                    className="flex justify-center items-center gap-2 border border-gray-300 rounded-md w-[187px] h-[31px] text-gray-600 hover:text-gray-900 transition-colors"
                   >
                     <span>Next</span>
                     <span>&gt;</span>
                   </Link>
                 ) : (
-                  <span className="flex items-center justify-center gap-2 text-gray-400 cursor-not-allowed border border-gray-300 rounded-md w-[187px] h-[31px]">
+                  <span className="flex justify-center items-center gap-2 border border-gray-300 rounded-md w-[187px] h-[31px] text-gray-400 cursor-not-allowed">
                     <span>Next</span>
                     <span>&gt;</span>
                   </span>
@@ -212,8 +198,8 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
           </div>
 
           {/* Right Column - Series Recommendations */}
-          <div className="w-full lg:w-[402px] flex-shrink-0 flex justify-center lg:justify-start">
-            <div className="lg:sticky lg:top-8 w-full space-y-6">
+          <div className="flex flex-shrink-0 justify-center lg:justify-start w-full lg:w-[402px]">
+            <div className="lg:top-8 lg:sticky space-y-6 w-full">
               {/* 推荐系列文章 - 侧边栏样式 */}
               <ArticleRecommendations
                 series={recommendations.series}
@@ -230,7 +216,7 @@ export default async function FaqDetailPage({ params }: FaqPageProps) {
 
       {/* Continue Reading Section - Bottom */}
       <div className="bg-[#FEFCF7] py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
           <ArticleRecommendations
             series={[]}
             continueReading={recommendations.continueReading}
