@@ -71,10 +71,10 @@ export default function AboutPage() {
         <p className="text-sm sm:text-base md:text-lg leading-relaxed">
           Feel free to reach out to us at:{" "}
           <a
-            href="mailto:support@atominfinite.ai"
+            href="mailto:support@wisfile.ai"
             className="text-blue-600 active:text-blue-800 hover:underline touch-manipulation"
           >
-            support@atominfinite.ai
+            support@wisfile.ai
           </a>
         </p>
       </div>

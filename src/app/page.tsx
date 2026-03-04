@@ -111,7 +111,7 @@ export default function Home() {
               <div className="ml-4 md:ml-6 text-gray-700 text-sm md:text-base">
                 You can send your advice or your questions to our support
                 e-mail:{" "}
-                <span className="text-[#FFA800]">support@atominfinite.ai</span>
+                <span className="text-[#FFA800]">support@wisfile.ai</span>
               </div>
             </div>
           </div>

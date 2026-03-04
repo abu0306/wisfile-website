@@ -232,7 +232,7 @@ export default function TermsOfService() {
         Services, please contact us at:
       </p>
       <p>
-        <strong>Email</strong>: support@atominfinite.ai
+        <strong>Email</strong>: support@wisfile.ai
         <br />
         <strong>Postal Address</strong>: ATOM INFINITE PTE. LTD., 4 Leng Kee
         Road #03-12, SIS Building, Singapore 159088

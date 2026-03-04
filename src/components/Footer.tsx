@@ -118,7 +118,7 @@ export default function Footer() {
             </a>
           </div>
           <div className="font-medium text-gray-700 text-sm md:text-base text-left md:text-left">
-            support@atominfinite.ai
+            support@wisfile.ai
           </div>
         </div>
       </div>
