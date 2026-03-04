@@ -10,7 +10,7 @@ interface UseLazyLoadOptions {
 
 export const useLazyLoad = (
   options: UseLazyLoadOptions = {}
-): [React.RefObject<HTMLDivElement>, boolean] => {
+): [React.RefObject<HTMLDivElement | null>, boolean] => {
   const { rootMargin = "50px", threshold = 0.1, triggerOnce = true } = options;
 
   const [isInView, setIsInView] = useState(false);

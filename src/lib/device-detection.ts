@@ -1,9 +1,9 @@
 import { headers } from 'next/headers';
 
 // 服务端检测移动端
-export function isMobileServer(): boolean {
+export async function isMobileServer(): Promise<boolean> {
     try {
-        const headersList = headers();
+        const headersList = await headers();
         const userAgent = headersList.get('user-agent') || '';
         return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(userAgent);
     } catch {
@@ -20,9 +20,9 @@ export function isMobileClient(): boolean {
 }
 
 // 检测是否为平板设备
-export function isTabletServer(): boolean {
+export async function isTabletServer(): Promise<boolean> {
     try {
-        const headersList = headers();
+        const headersList = await headers();
         const userAgent = headersList.get('user-agent') || '';
         return /iPad|Android(?=.*\bMobile\b)(?=.*\bSafari\b)/i.test(userAgent);
     } catch {
@@ -31,9 +31,9 @@ export function isTabletServer(): boolean {
 }
 
 // 检测设备类型
-export function getDeviceTypeServer(): 'mobile' | 'tablet' | 'desktop' {
+export async function getDeviceTypeServer(): Promise<'mobile' | 'tablet' | 'desktop'> {
     try {
-        const headersList = headers();
+        const headersList = await headers();
         const userAgent = headersList.get('user-agent') || '';
 
         if (/iPad|Android(?=.*\bMobile\b)(?=.*\bSafari\b)/i.test(userAgent)) {

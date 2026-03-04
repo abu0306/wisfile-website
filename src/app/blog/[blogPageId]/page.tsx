@@ -10,9 +10,10 @@ import type { Metadata } from "next";
 export async function generateMetadata({
   params,
 }: {
-  params: { blogPageId: string };
+  params: Promise<{ blogPageId: string }>;
 }): Promise<Metadata> {
-  const pageId = parsePageId(params.blogPageId);
+  const { blogPageId } = await params;
+  const pageId = parsePageId(blogPageId);
 
   if (!pageId) {
     return {
@@ -36,14 +37,14 @@ export async function generateMetadata({
         "Instantly sorts your files into logical folders for easy access. " +
         "All operations run on your device — no cloud, no data leaks.",
       alternates: {
-        canonical: `https://www.wisfile.ai/blog/${params.blogPageId}`,
+        canonical: `https://www.wisfile.ai/blog/${blogPageId}`,
       },
       openGraph: {
         title: `${title} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
         description:
           "100% Local AI File Renamer and Organizer — No Fees, No Data Leaks. " +
           "Automatically generates clear, consistent filenames based on content.",
-        url: `https://www.wisfile.ai/blog/${params.blogPageId}`,
+        url: `https://www.wisfile.ai/blog/${blogPageId}`,
         siteName: "WisFile",
         type: "article",
       },
@@ -66,7 +67,7 @@ export async function generateMetadata({
         "Instantly sorts your files into logical folders for easy access. " +
         "All operations run on your device — no cloud, no data leaks.",
       alternates: {
-        canonical: `https://www.wisfile.ai/blog/${params.blogPageId}`,
+        canonical: `https://www.wisfile.ai/blog/${blogPageId}`,
       },
     };
   }
@@ -76,9 +77,10 @@ export async function generateMetadata({
 export default async function BlogPage({
   params,
 }: {
-  params: { blogPageId: string };
+  params: Promise<{ blogPageId: string }>;
 }) {
-  const pageId = parsePageId(params.blogPageId);
+  const { blogPageId } = await params;
+  const pageId = parsePageId(blogPageId);
 
   if (!pageId) {
     return notFound();
