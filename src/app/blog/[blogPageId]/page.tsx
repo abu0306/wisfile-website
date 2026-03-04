@@ -7,6 +7,11 @@ import { parsePageId } from "notion-utils";
 import { getCanonicalPageId } from "@/lib/get-canonical-page-id";
 import type { Metadata } from "next";
 
+
+function logBlogBuildDebug(stage: string, payload: Record<string, unknown>) {
+  console.log(`[blog-build][${stage}]`, payload);
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -14,6 +19,8 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { blogPageId } = await params;
   const pageId = parsePageId(blogPageId);
+
+  logBlogBuildDebug("generateMetadata:start", { blogPageId, pageId });
 
   if (!pageId) {
     return {
@@ -25,6 +32,14 @@ export async function generateMetadata({
   try {
     const recordMap = await notion.getPage(pageId);
 
+    logBlogBuildDebug("generateMetadata:page-fetched", {
+      blogPageId,
+      pageId,
+      recordMap,
+      hasRecordMap: Boolean(recordMap),
+      hasBlocks: Boolean(recordMap?.block),
+    });
+
     // Extract page title from Notion data
     const pageBlock = recordMap.block[pageId];
     const normalizedPageBlock =
@@ -32,6 +47,15 @@ export async function generateMetadata({
         ? pageBlock.value
         : pageBlock;
     const title = normalizedPageBlock?.properties?.title?.[0]?.[0] || "Blog Post";
+
+    if (!normalizedPageBlock?.properties?.title?.[0]?.[0]) {
+      logBlogBuildDebug("generateMetadata:title-fallback", {
+        blogPageId,
+        pageId,
+        hasBlock: Boolean(pageBlock),
+        wrappedBlock: Boolean(pageBlock && "role" in pageBlock && "value" in pageBlock),
+      });
+    }
 
     return {
       title: `${title} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
@@ -63,6 +87,11 @@ export async function generateMetadata({
     };
   } catch (error) {
     console.error(`Error generating metadata for page ${pageId}:`, error);
+    logBlogBuildDebug("generateMetadata:error", {
+      blogPageId,
+      pageId,
+      error,
+    });
     return {
       title: "Blog Post | Wisfile: AI-Powered File Renaming & Organizing Tool",
       description:
@@ -86,6 +115,8 @@ export default async function BlogPage({
   const { blogPageId } = await params;
   const pageId = parsePageId(blogPageId);
 
+  logBlogBuildDebug("BlogPage:start", { blogPageId, pageId });
+
   if (!pageId) {
     return notFound();
   }
@@ -103,12 +134,18 @@ export default async function BlogPage({
     );
   } catch (error) {
     console.error(`Error loading page ${pageId}:`, error);
+    logBlogBuildDebug("BlogPage:error", {
+      blogPageId,
+      pageId,
+      error,
+    });
     return notFound();
   }
 }
 
 export async function generateStaticParams() {
   try {
+    logBlogBuildDebug("generateStaticParams:start", { rootNotionPageId });
     const rootPage = await notion.getPage(rootNotionPageId);
 
     if (rootPage.collection_view) {
@@ -123,6 +160,9 @@ export async function generateStaticParams() {
 
       // Remove duplicates
       const uniquePageIds = Array.from(new Set(pageIds));
+      logBlogBuildDebug("generateStaticParams:collected", {
+        pageCount: uniquePageIds.length,
+      });
 
       // Generate static params without validating each page individually
       // Page validation will happen in the component itself when accessed
@@ -140,10 +180,17 @@ export async function generateStaticParams() {
 
       return staticParams;
     } else {
+      logBlogBuildDebug("generateStaticParams:no-collection-view", {
+        rootNotionPageId,
+      });
       return [];
     }
   } catch (error) {
     console.error("Error generating static params:", error);
+    logBlogBuildDebug("generateStaticParams:error", {
+      rootNotionPageId,
+      error,
+    });
     return [];
   }
 }
