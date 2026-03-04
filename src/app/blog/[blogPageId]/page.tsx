@@ -26,8 +26,12 @@ export async function generateMetadata({
     const recordMap = await notion.getPage(pageId);
 
     // Extract page title from Notion data
-    const pageBlock = recordMap.block[pageId]?.value;
-    const title = pageBlock?.properties?.title?.[0]?.[0] || "Blog Post";
+    const pageBlock = recordMap.block[pageId];
+    const normalizedPageBlock =
+      pageBlock && "role" in pageBlock && "value" in pageBlock
+        ? pageBlock.value
+        : pageBlock;
+    const title = normalizedPageBlock?.properties?.title?.[0]?.[0] || "Blog Post";
 
     return {
       title: `${title} | Wisfile: AI-Powered File Renaming & Organizing Tool`,
