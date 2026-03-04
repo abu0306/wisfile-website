@@ -241,7 +241,7 @@ export default function PrivacyPolicy() {
         <li>
           <b>U.S. Users</b>: California residents may submit CCPA requests
           (e.g., request to know, delete, or opt-out) by contacting us at{" "}
-          <b>support@atominfinite.ai</b>.
+          <b>support@wisfile.ai</b>.
         </li>
       </ul>
 
@@ -261,7 +261,7 @@ export default function PrivacyPolicy() {
         For any questions or concerns regarding your privacy, you may contact us
         using the following details:
         <br />
-        <b>support@atominfinite.ai</b>
+        <b>support@wisfile.ai</b>
       </p>
     </div>
   );
