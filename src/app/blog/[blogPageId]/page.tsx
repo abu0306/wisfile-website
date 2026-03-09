@@ -12,6 +12,44 @@ function logBlogBuildDebug(stage: string, payload: Record<string, unknown>) {
   console.log(`[blog-build][${stage}]`, payload);
 }
 
+function isObjectRecord(value: unknown): value is Record<string, unknown> {
+  return typeof value === "object" && value !== null;
+}
+
+function isWrappedBlockEntry(
+  value: unknown
+): value is { role: unknown; value: unknown } {
+  return isObjectRecord(value) && "role" in value && "value" in value;
+}
+
+function extractTitleFromBlockEntry(blockEntry: unknown): string | undefined {
+  const normalizedBlock = isWrappedBlockEntry(blockEntry)
+    ? blockEntry.value
+    : blockEntry;
+
+  if (!isObjectRecord(normalizedBlock)) {
+    return undefined;
+  }
+
+  const properties = normalizedBlock["properties"];
+  if (!isObjectRecord(properties)) {
+    return undefined;
+  }
+
+  const title = properties["title"];
+  if (!Array.isArray(title) || title.length === 0) {
+    return undefined;
+  }
+
+  const firstTitleGroup = title[0];
+  if (!Array.isArray(firstTitleGroup) || firstTitleGroup.length === 0) {
+    return undefined;
+  }
+
+  const firstTitle = firstTitleGroup[0];
+  return typeof firstTitle === "string" ? firstTitle : undefined;
+}
+
 export async function generateMetadata({
   params,
 }: {
@@ -42,18 +80,15 @@ export async function generateMetadata({
 
     // Extract page title from Notion data
     const pageBlock = recordMap.block[pageId];
-    const normalizedPageBlock =
-      pageBlock && "role" in pageBlock && "value" in pageBlock
-        ? pageBlock.value
-        : pageBlock;
-    const title = normalizedPageBlock?.properties?.title?.[0]?.[0] || "Blog Post";
+    const extractedTitle = extractTitleFromBlockEntry(pageBlock);
+    const title = extractedTitle || "Blog Post";
 
-    if (!normalizedPageBlock?.properties?.title?.[0]?.[0]) {
+    if (!extractedTitle) {
       logBlogBuildDebug("generateMetadata:title-fallback", {
         blogPageId,
         pageId,
         hasBlock: Boolean(pageBlock),
-        wrappedBlock: Boolean(pageBlock && "role" in pageBlock && "value" in pageBlock),
+        wrappedBlock: isWrappedBlockEntry(pageBlock),
       });
     }
 

@@ -281,7 +281,9 @@ export default function MetadataRemoverPage() {
   const handleDownload = () => {
     if (selectedFile && cleanedFileData) {
       // Create download link for the cleaned file
-      const blob = new Blob([cleanedFileData], { type: "application/pdf" });
+      const blobBytes = new Uint8Array(cleanedFileData.byteLength);
+      blobBytes.set(cleanedFileData);
+      const blob = new Blob([blobBytes.buffer], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
       link.href = url;
